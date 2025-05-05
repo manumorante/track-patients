@@ -3,7 +3,7 @@ import type { Patient } from '@/types'
 
 const delay = () => new Promise((resolve) => setTimeout(resolve, 500))
 
-// Read operations
+// Simulated API calls that use localStorage through Zustand
 export async function getPatients(): Promise<Patient[]> {
   await delay()
   return usePatientsStore.getState().patients
@@ -16,20 +16,22 @@ export async function getPatient(id: string): Promise<Patient> {
   return patient
 }
 
-// Write operations
-export async function createPatient(patient: Omit<Patient, 'id'>): Promise<Patient> {
+export async function createPatient(data: Omit<Patient, 'id'>): Promise<Patient> {
   await delay()
   const store = usePatientsStore.getState()
-  const newPatient = { ...patient, id: crypto.randomUUID() }
-  store.create(patient)
+  const newPatient = { ...data, id: crypto.randomUUID() }
+
+  store.setPatients([...store.patients, newPatient])
   return newPatient
 }
 
-export async function updatePatient(id: string, patient: Partial<Patient>): Promise<Patient> {
+export async function updatePatient(id: string, data: Partial<Patient>): Promise<Patient> {
   await delay()
   const store = usePatientsStore.getState()
-  store.update(id, patient)
-  const updated = store.patients.find((p) => p.id === id)
+  const updatedPatients = store.patients.map((p) => (p.id === id ? { ...p, ...data } : p))
+
+  store.setPatients(updatedPatients)
+  const updated = updatedPatients.find((p) => p.id === id)
   if (!updated) throw new Error('Patient not found')
   return updated
 }
@@ -37,5 +39,5 @@ export async function updatePatient(id: string, patient: Partial<Patient>): Prom
 export async function deletePatient(id: string): Promise<void> {
   await delay()
   const store = usePatientsStore.getState()
-  store.remove(id)
+  store.setPatients(store.patients.filter((p) => p.id !== id))
 }
