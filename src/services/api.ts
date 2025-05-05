@@ -1,5 +1,6 @@
-import { usePatientsStore } from '@/store/patientsStore'
+import { usePatientsStore } from '@/stores/patientsStore'
 import type { Patient } from '@/types'
+import { patients as initialPatients } from '@/data/patients'
 
 const delay = () => new Promise((resolve) => setTimeout(resolve, 500))
 
@@ -55,4 +56,11 @@ export async function deletePatient(id: string): Promise<void> {
   await delay()
   const store = usePatientsStore.getState()
   store.setPatients(store.patients.filter((p) => p.id !== id))
+}
+
+export async function resetPatients(): Promise<Patient[]> {
+  await delay()
+  const store = usePatientsStore.getState()
+  store.setPatients(initialPatients)
+  return initialPatients
 }

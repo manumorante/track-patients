@@ -4,6 +4,7 @@ import {
   deletePatient,
   getPatient,
   getPatients,
+  resetPatients,
   updatePatient,
 } from '@/services/api'
 import type { Patient } from '@/types'
@@ -53,6 +54,17 @@ export function useDeletePatient() {
 
   return useMutation({
     mutationFn: deletePatient,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['patients'] })
+    },
+  })
+}
+
+export function useResetPatients() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: resetPatients,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['patients'] })
     },

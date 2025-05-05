@@ -4,4 +4,5 @@ export {
   useCreatePatient,
   useUpdatePatient,
   useDeletePatient,
+  useResetPatients,
 } from './usePatients'
