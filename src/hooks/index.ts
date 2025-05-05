@@ -1,1 +1,7 @@
-export { usePatients } from './usePatients'
+export {
+  usePatients,
+  usePatient,
+  useCreatePatient,
+  useUpdatePatient,
+  useDeletePatient,
+} from './usePatients'
