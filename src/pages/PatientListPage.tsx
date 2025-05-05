@@ -1,23 +1,24 @@
+import { useState } from 'react'
 import { useCreatePatient, useDeletePatient, usePatients, useUpdatePatient } from '@/hooks'
+import { PatientForm } from '@/components'
+import type { Patient } from '@/types'
 
 export default function PatientListPage() {
+  const [isFormOpen, setIsFormOpen] = useState(false)
   const { data: patients, isLoading } = usePatients()
   const createPatient = useCreatePatient()
   const updatePatient = useUpdatePatient()
   const deletePatient = useDeletePatient()
 
-  const handleCreate = () => {
-    createPatient.mutate({
-      name: 'New Patient',
-      age: 30,
-      primaryCondition: 'Unknown',
-    })
+  const handleCreate = (data: Omit<Patient, 'id'>) => {
+    createPatient.mutate(data)
+    setIsFormOpen(false)
   }
 
   const handleUpdateAge = (id: string, currentAge: number) => {
     updatePatient.mutate({
       id,
-      patient: { age: currentAge + 1 },
+      patient: { age: Number(currentAge) + 1 },
     })
   }
 
@@ -28,11 +29,17 @@ export default function PatientListPage() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Patients</h1>
         <button
-          onClick={handleCreate}
+          onClick={() => setIsFormOpen(true)}
           className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
           Add Patient
         </button>
       </div>
+
+      {isFormOpen && (
+        <div className="mb-8 rounded-lg border p-4 shadow">
+          <PatientForm onSubmit={handleCreate} onCancel={() => setIsFormOpen(false)} />
+        </div>
+      )}
 
       <div className="space-y-6">
         {patients?.map((patient) => (
