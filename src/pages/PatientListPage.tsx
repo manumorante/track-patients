@@ -1,4 +1,5 @@
-import { Button, Card, PatientForm, SearchInput } from '@/components'
+import { Button, PatientForm, SearchInput } from '@/components'
+import { PatientCard } from '@/components/PatientCard'
 import { useCreatePatient, useDeletePatient, useUpdatePatient, useResetPatients } from '@/hooks'
 import { useSearchPatients } from '@/hooks/useSearchPatients'
 import type { Patient } from '@/types'
@@ -63,28 +64,12 @@ export default function PatientListPage() {
           </>
         ) : (
           patients?.map((patient) => (
-            <Card key={patient.id}>
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-lg font-medium">
-                    {patient.name}, <span>{patient.age}</span>
-                  </h2>
-                  <p className="text-emerald-600">{patient.primaryCondition}</p>
-                </div>
-
-                <div className="flex gap-2">
-                  <Button
-                    variant="secondary"
-                    onClick={() => setFormMode({ type: 'edit', patient })}>
-                    Edit
-                  </Button>
-
-                  <Button variant="secondary" onClick={() => deletePatient.mutate(patient.id)}>
-                    Delete
-                  </Button>
-                </div>
-              </div>
-            </Card>
+            <PatientCard
+              key={patient.id}
+              patient={patient}
+              onEdit={(patient) => setFormMode({ type: 'edit', patient })}
+              onDelete={(id) => deletePatient.mutate(id)}
+            />
           ))
         )}
       </div>
