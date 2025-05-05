@@ -13,7 +13,7 @@ export async function searchPatients(query: string): Promise<Patient[]> {
   await delay()
   const search = query.toLowerCase().trim()
 
-  if (!search) {
+  if (!search || search.length < 3) {
     return usePatientsStore.getState().patients
   }
 
