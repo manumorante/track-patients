@@ -3,16 +3,25 @@ import { useCreatePatient, useDeletePatient, usePatients, useUpdatePatient } fro
 import { PatientForm } from '@/components'
 import type { Patient } from '@/types'
 
+type FormMode = { type: 'create' } | { type: 'edit'; patient: Patient }
+
 export default function PatientListPage() {
-  const [isFormOpen, setIsFormOpen] = useState(false)
+  const [formMode, setFormMode] = useState<FormMode | null>(null)
   const { data: patients, isLoading } = usePatients()
   const createPatient = useCreatePatient()
   const updatePatient = useUpdatePatient()
   const deletePatient = useDeletePatient()
 
-  const handleCreate = (data: Omit<Patient, 'id'>) => {
-    createPatient.mutate(data)
-    setIsFormOpen(false)
+  const handleSubmit = (data: Omit<Patient, 'id'>) => {
+    if (formMode?.type === 'edit') {
+      updatePatient.mutate({
+        id: formMode.patient.id,
+        patient: data,
+      })
+    } else {
+      createPatient.mutate(data)
+    }
+    setFormMode(null)
   }
 
   const handleUpdateAge = (id: string, currentAge: number) => {
@@ -29,15 +38,22 @@ export default function PatientListPage() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Patients</h1>
         <button
-          onClick={() => setIsFormOpen(true)}
+          onClick={() => setFormMode({ type: 'create' })}
           className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
           Add Patient
         </button>
       </div>
 
-      {isFormOpen && (
+      {formMode && (
         <div className="mb-8 rounded-lg border p-4 shadow">
-          <PatientForm onSubmit={handleCreate} onCancel={() => setIsFormOpen(false)} />
+          <h2 className="mb-4 text-xl font-bold">
+            {formMode.type === 'create' ? 'Add New Patient' : 'Edit Patient'}
+          </h2>
+          <PatientForm
+            onSubmit={handleSubmit}
+            onCancel={() => setFormMode(null)}
+            defaultValues={formMode.type === 'edit' ? formMode.patient : undefined}
+          />
         </div>
       )}
 
@@ -55,6 +71,12 @@ export default function PatientListPage() {
             </div>
 
             <div className="flex gap-2">
+              <button
+                onClick={() => setFormMode({ type: 'edit', patient })}
+                className="rounded bg-gray-100 px-3 py-1 hover:bg-gray-200">
+                Edit
+              </button>
+
               <button
                 onClick={() => handleUpdateAge(patient.id, patient.age)}
                 className="rounded bg-gray-100 px-3 py-1 hover:bg-gray-200">
