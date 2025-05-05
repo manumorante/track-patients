@@ -1,7 +1,6 @@
+import type { FormData } from '@/types'
 import { useForm } from 'react-hook-form'
-import type { Patient } from '@/types'
-
-type FormData = Omit<Patient, 'id'>
+import Button from './Button'
 
 interface Props {
   onSubmit: (data: FormData) => void
@@ -72,19 +71,13 @@ export default function PatientForm({ onSubmit, onCancel, defaultValues }: Props
 
       <div className="flex justify-end gap-2">
         {onCancel && (
-          <button
-            type="button"
-            onClick={onCancel}
-            className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none">
+          <Button type="button" onClick={onCancel} variant="secondary">
             Cancel
-          </button>
+          </Button>
         )}
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:opacity-50">
+        <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Saving...' : 'Save Patient'}
-        </button>
+        </Button>
       </div>
     </form>
   )
