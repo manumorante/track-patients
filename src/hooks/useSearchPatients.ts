@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useDebounce } from '@/hooks/useDebounce'
 import { searchPatients } from '@/services/api'
-import { useDebounce } from './useDebounce'
+import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 
 export function useSearchPatients(initialQuery = '') {
   const [query, setQuery] = useState(initialQuery)
