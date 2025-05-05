@@ -9,6 +9,21 @@ export async function getPatients(): Promise<Patient[]> {
   return usePatientsStore.getState().patients
 }
 
+export async function searchPatients(query: string): Promise<Patient[]> {
+  await delay()
+  const search = query.toLowerCase().trim()
+
+  if (!search) {
+    return usePatientsStore.getState().patients
+  }
+
+  return usePatientsStore.getState().patients.filter((patient) => {
+    const name = patient.name.toLowerCase()
+    const condition = patient.primaryCondition.toLowerCase()
+    return name.includes(search) || condition.includes(search)
+  })
+}
+
 export async function getPatient(id: string): Promise<Patient> {
   await delay()
   const patient = usePatientsStore.getState().patients.find((p) => p.id === id)
