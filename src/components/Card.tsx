@@ -1,3 +1,10 @@
-export default function Card() {
-  return <div>Card</div>
+import clsx from 'clsx'
+
+interface CardProps {
+  children: React.ReactNode
+  className?: string
+}
+
+export default function Card({ children, className }: CardProps) {
+  return <div className={clsx('rounded-lg bg-white p-6 shadow-sm', className)}>{children}</div>
 }
