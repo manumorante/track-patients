@@ -1,5 +1,3 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { useCreatePatient, useUpdatePatient } from '@/hooks'
 import { usePatientsStore } from '@/stores/patientsStore'
 import type { PatientDraft } from '@/types'
@@ -53,14 +51,19 @@ export default function PatientForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">Name</label>
-          <Input type="text" {...register('name', { required: 'Name is required' })} />
+          <input
+            type="text"
+            className="input"
+            {...register('name', { required: 'Name is required' })}
+          />
           {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Age</label>
-          <Input
+          <input
             type="number"
+            className="input"
             {...register('age', {
               required: 'Age is required',
               min: { value: 0, message: 'Age must be positive' },
@@ -73,8 +76,9 @@ export default function PatientForm() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Primary Condition</label>
-          <Input
+          <input
             type="text"
+            className="input"
             {...register('primaryCondition', { required: 'Primary condition is required' })}
           />
           {errors.primaryCondition && (
@@ -82,14 +86,17 @@ export default function PatientForm() {
           )}
         </div>
 
-        <div className="flex justify-end space-x-3">
-          <Button onClick={closeForm} variant="secondary">
-            Cancel
-          </Button>
+        <div className="flex justify-between">
+          <button className="button danger">Delete</button>
+          <div className="space-x-3">
+            <button onClick={closeForm} className="button secondary">
+              Cancel
+            </button>
 
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Saving...' : 'Save patient'}
-          </Button>
+            <button type="submit" disabled={isSubmitting} className="button">
+              {isSubmitting ? 'Saving...' : 'Save'}
+            </button>
+          </div>
         </div>
       </form>
     </div>

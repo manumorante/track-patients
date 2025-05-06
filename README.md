@@ -13,7 +13,7 @@ Required:
 My choices:
 
 - **Zustand**: Simple global state
-- **Tailwind + Shadcn/UI**: Clean UI components
+- **Tailwind**: Clean UI styling
 
 ## 🚀 Quick Start
 

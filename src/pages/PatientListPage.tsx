@@ -1,5 +1,4 @@
 import { PatientCard, PatientFormDialog, PatientsSearch } from '@/components/patients'
-import { Button } from '@/components/ui/button'
 import { useSearchPatients } from '@/hooks/useSearchPatients'
 import { usePatientsStore } from '@/stores/patientsStore'
 
@@ -12,8 +11,12 @@ export default function PatientListPage() {
       <h1 className="mb-4 text-3xl">Patients</h1>
 
       <div className="mb-8 flex items-center gap-3">
-        <PatientsSearch className="flex-1" />
-        <Button onClick={() => openForm()}>Add Patient</Button>
+        <div className="flex-1">
+          <PatientsSearch />
+        </div>
+        <button className="button" onClick={() => openForm()}>
+          Add Patient
+        </button>
       </div>
 
       <PatientFormDialog />
