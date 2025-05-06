@@ -1,32 +1,46 @@
+import { Button } from '@/components/ui/button'
+import { useCreatePatient, useUpdatePatient } from '@/hooks'
+import { usePatientsStore } from '@/stores/patientsStore'
 import type { PatientDraft } from '@/types'
 import { useForm } from 'react-hook-form'
-import { usePatientsStore } from '@/stores/patientsStore'
-import { Button } from '../ui/button'
 
-interface Props {
-  onSubmit: (data: PatientDraft) => void
-  defaultValues?: Partial<PatientDraft>
-}
-
-export default function PatientForm({ onSubmit, defaultValues }: Props) {
+export default function PatientForm() {
   const { editingPatientId, closeForm } = usePatientsStore()
+  const createPatient = useCreatePatient()
+  const updatePatient = useUpdatePatient()
+
+  // Get the current patient being edited from the store
+  const editingPatient = usePatientsStore((state) =>
+    editingPatientId ? state.patients.find((p) => p.id === editingPatientId) : undefined,
+  )
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<PatientDraft>({
-    defaultValues: defaultValues || {
+    defaultValues: editingPatient || {
       name: '',
       age: 30,
       primaryCondition: '',
     },
   })
 
-  const onSubmitForm = (data: PatientDraft) => {
-    onSubmit({
+  const onSubmit = (data: PatientDraft) => {
+    const formattedData = {
       ...data,
       age: Number(data.age),
-    })
+    }
+
+    if (editingPatientId) {
+      updatePatient.mutate({
+        id: editingPatientId,
+        patient: formattedData,
+      })
+    } else {
+      createPatient.mutate(formattedData)
+    }
+    closeForm()
   }
 
   return (
@@ -35,7 +49,7 @@ export default function PatientForm({ onSubmit, defaultValues }: Props) {
         {editingPatientId ? 'Edit Patient' : 'Add New Patient'}
       </h2>
 
-      <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">Name</label>
           <input
