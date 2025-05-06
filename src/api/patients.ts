@@ -14,7 +14,7 @@ export const api = {
 
   async search(query: string): Promise<Patient[]> {
     await delay()
-    if (!query?.trim() || query.length < 3) return store.getState().patients
+    if (!query?.trim() || query.length < 2) return store.getState().patients
 
     const search = query.toLowerCase()
     return store

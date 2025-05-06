@@ -1,5 +1,5 @@
-import { useDebounce } from '@/hooks/useDebounce'
 import { api } from '@/api/patients'
+import { useDebounce } from '@/hooks/useDebounce'
 import { useQuery } from '@tanstack/react-query'
 
 export function useSearchPatients(query: string = '') {
