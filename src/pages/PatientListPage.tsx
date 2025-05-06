@@ -1,14 +1,12 @@
 import { Button, PatientForm, SearchInput } from '@/components'
 import { PatientCard } from '@/components/PatientCard'
-import { useCreatePatient, useDeletePatient, useUpdatePatient, useResetPatients } from '@/hooks'
+import { useCreatePatient, useDeletePatient, useResetPatients, useUpdatePatient } from '@/hooks'
 import { useSearchPatients } from '@/hooks/useSearchPatients'
+import { useUIStore } from '@/stores/uiStore'
 import type { Patient } from '@/types'
-import { useState } from 'react'
-
-type FormMode = { type: 'create' } | { type: 'edit'; patient: Patient }
 
 export default function PatientListPage() {
-  const [formMode, setFormMode] = useState<FormMode | null>(null)
+  const { formMode, setFormMode } = useUIStore()
   const { query, setQuery, results: patients, isLoading } = useSearchPatients()
   const createPatient = useCreatePatient()
   const updatePatient = useUpdatePatient()
