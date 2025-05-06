@@ -1,28 +1,13 @@
-import { PatientsSearch, PatientCard, PatientForm } from '@/components/patients'
-import { useCreatePatient, useDeletePatient, useResetPatients, useUpdatePatient } from '@/hooks'
+import { PatientsSearch, PatientCard, PatientFormDialog } from '@/components/patients'
+import { useDeletePatient, useResetPatients } from '@/hooks'
 import { useSearchPatients } from '@/hooks/useSearchPatients'
-import { useUIStore } from '@/stores/uiStore'
-import type { Patient } from '@/types'
+import { usePatientsStore } from '@/stores/patientsStore'
 
 export default function PatientListPage() {
-  const { formMode, setFormMode } = useUIStore()
+  const { openForm } = usePatientsStore()
   const { query, setQuery, results: patients, isLoading } = useSearchPatients()
-  const createPatient = useCreatePatient()
-  const updatePatient = useUpdatePatient()
   const deletePatient = useDeletePatient()
   const resetPatients = useResetPatients()
-
-  const handleSubmit = (data: Omit<Patient, 'id'>) => {
-    if (formMode?.type === 'edit') {
-      updatePatient.mutate({
-        id: formMode.patient.id,
-        patient: data,
-      })
-    } else {
-      createPatient.mutate(data)
-    }
-    setFormMode(null)
-  }
 
   return (
     <>
@@ -35,20 +20,16 @@ export default function PatientListPage() {
             placeholder="Search by patient name..."
             className="max-w-lg"
           />
-          <button type="button" onClick={() => setFormMode({ type: 'create' })}>
+          <button
+            type="button"
+            onClick={() => openForm()}
+            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
             Add Patient
           </button>
         </div>
       </div>
 
-      {formMode && (
-        <PatientForm
-          mode={formMode.type}
-          onSubmit={handleSubmit}
-          onCancel={() => setFormMode(null)}
-          defaultValues={formMode.type === 'edit' ? formMode.patient : undefined}
-        />
-      )}
+      <PatientFormDialog />
 
       <div className="space-y-3">
         {isLoading ? (
@@ -57,7 +38,10 @@ export default function PatientListPage() {
           <>
             <div className="text-gray-500">No patients found</div>
 
-            <button type="button" onClick={() => resetPatients.mutate()}>
+            <button
+              type="button"
+              onClick={() => resetPatients.mutate()}
+              className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
               Reset data
             </button>
           </>
@@ -66,7 +50,7 @@ export default function PatientListPage() {
             <PatientCard
               key={patient.id}
               patient={patient}
-              onEdit={(patient) => setFormMode({ type: 'edit', patient })}
+              onEdit={() => openForm(patient.id)}
               onDelete={(id) => deletePatient.mutate(id)}
             />
           ))

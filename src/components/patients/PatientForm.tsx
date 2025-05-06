@@ -1,14 +1,14 @@
 import type { PatientDraft } from '@/types'
 import { useForm } from 'react-hook-form'
+import { usePatientsStore } from '@/stores/patientsStore'
 
 interface Props {
-  mode: 'create' | 'edit'
   onSubmit: (data: PatientDraft) => void
-  onCancel?: () => void
   defaultValues?: Partial<PatientDraft>
 }
 
-export default function PatientForm({ mode, onSubmit, onCancel, defaultValues }: Props) {
+export default function PatientForm({ onSubmit, defaultValues }: Props) {
+  const { editingPatientId, closeForm } = usePatientsStore()
   const {
     register,
     handleSubmit,
@@ -31,7 +31,7 @@ export default function PatientForm({ mode, onSubmit, onCancel, defaultValues }:
   return (
     <div className="mb-8 rounded-lg bg-white p-6 shadow-sm">
       <h2 className="mb-4 text-xl font-bold">
-        {mode === 'create' ? 'Add New Patient' : 'Edit Patient'}
+        {editingPatientId ? 'Edit Patient' : 'Add New Patient'}
       </h2>
 
       <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">
@@ -64,9 +64,7 @@ export default function PatientForm({ mode, onSubmit, onCancel, defaultValues }:
           <label className="block text-sm font-medium text-gray-700">Primary Condition</label>
           <input
             type="text"
-            {...register('primaryCondition', {
-              required: 'Primary condition is required',
-            })}
+            {...register('primaryCondition', { required: 'Primary condition is required' })}
             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
           />
           {errors.primaryCondition && (
@@ -74,14 +72,18 @@ export default function PatientForm({ mode, onSubmit, onCancel, defaultValues }:
           )}
         </div>
 
-        <div className="flex justify-end gap-2">
-          {onCancel && (
-            <button type="button" onClick={onCancel}>
-              Cancel
-            </button>
-          )}
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Saving...' : 'Save Patient'}
+        <div className="flex justify-end space-x-3">
+          <button
+            type="button"
+            onClick={closeForm}
+            className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50">
+            {isSubmitting ? 'Saving...' : 'Save'}
           </button>
         </div>
       </form>
