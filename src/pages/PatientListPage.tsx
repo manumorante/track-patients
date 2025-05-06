@@ -1,4 +1,5 @@
 import { PatientsSearch, PatientCard, PatientFormDialog } from '@/components/patients'
+import { Button } from '@/components/ui/button'
 import { useDeletePatient, useResetPatients } from '@/hooks'
 import { useSearchPatients } from '@/hooks/useSearchPatients'
 import { usePatientsStore } from '@/stores/patientsStore'
@@ -20,12 +21,7 @@ export default function PatientListPage() {
             placeholder="Search by patient name..."
             className="max-w-lg"
           />
-          <button
-            type="button"
-            onClick={() => openForm()}
-            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
-            Add Patient
-          </button>
+          <Button onClick={() => openForm()}>Add Patient</Button>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import type { PatientDraft } from '@/types'
 import { useForm } from 'react-hook-form'
 import { usePatientsStore } from '@/stores/patientsStore'
+import { Button } from '../ui/button'
 
 interface Props {
   onSubmit: (data: PatientDraft) => void
@@ -73,18 +74,13 @@ export default function PatientForm({ onSubmit, defaultValues }: Props) {
         </div>
 
         <div className="flex justify-end space-x-3">
-          <button
-            type="button"
-            onClick={closeForm}
-            className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+          <Button onClick={closeForm} variant="secondary">
             Cancel
-          </button>
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50">
-            {isSubmitting ? 'Saving...' : 'Save'}
-          </button>
+          </Button>
+
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Saving...' : 'Save patient'}
+          </Button>
         </div>
       </form>
     </div>

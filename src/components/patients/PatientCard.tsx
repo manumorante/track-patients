@@ -1,5 +1,6 @@
 import type { Patient } from '@/types'
 import { Link } from 'react-router-dom'
+import { Button } from '../ui/button'
 
 interface Props {
   patient: Patient
@@ -18,12 +19,10 @@ export default function PatientCard({ patient, onEdit, onDelete }: Props) {
       </Link>
 
       <div className="flex gap-2">
-        <button type="button" onClick={() => onEdit(patient)}>
-          Edit
-        </button>
-        <button type="button" onClick={() => onDelete(patient.id)}>
+        <Button onClick={() => onEdit(patient)}>Edit</Button>
+        <Button onClick={() => onDelete(patient.id)} variant="destructive">
           Delete
-        </button>
+        </Button>
       </div>
     </div>
   )
