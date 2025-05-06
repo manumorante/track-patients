@@ -1,18 +1,42 @@
+import { LoadingFallback } from '@/components/common/LoadingFallback'
 import { MainLayout } from '@/layouts'
-import { HomePage, PatientDetailPage, PatientListPage, LatestNotesPage } from '@/pages'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+// Lazy load pages
+const HomePage = lazy(() => import('@/pages/HomePage'))
+const PatientListPage = lazy(() => import('@/pages/PatientListPage'))
+const PatientDetailPage = lazy(() => import('@/pages/PatientDetailPage'))
+const LatestNotesPage = lazy(() => import('@/pages/LatestNotesPage'))
+
+const router = createBrowserRouter([
+  {
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: 'patients',
+        element: <PatientListPage />,
+      },
+      {
+        path: 'patients/:id',
+        element: <PatientDetailPage />,
+      },
+      {
+        path: 'notes',
+        element: <LatestNotesPage />,
+      },
+    ],
+  },
+])
 
 export default function AppRouter() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/patients" element={<PatientListPage />} />
-          <Route path="/patients/:id" element={<PatientDetailPage />} />
-          <Route path="/notes" element={<LatestNotesPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Suspense fallback={<LoadingFallback />}>
+      <RouterProvider router={router} />
+    </Suspense>
   )
 }

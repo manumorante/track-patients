@@ -1,4 +1,4 @@
-import { Navigation } from '@/components/Navigation'
+import { Navigation } from '@/components/common/Navigation'
 import { Outlet } from 'react-router-dom'
 
 export default function MainLayout() {

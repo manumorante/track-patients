@@ -59,6 +59,16 @@ src/
 - Shared interfaces for type safety
 - Clean separation of concerns
 
+## Technical Notes
+
+### Router Implementation
+
+Simple and performant router setup with lazy loading for heavy pages.
+
+All pages use dynamic imports (`React.lazy`) to split the bundle and load each page on demand. This keeps the initial load fast regardless of which route the user enters from.
+
+**Note:** 404 page and error boundaries were omitted for simplicity but would be added in a real app.
+
 ## 📄 License
 
 MIT
