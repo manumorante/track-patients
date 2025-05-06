@@ -5,4 +5,4 @@ export type Patient = {
   primaryCondition: string
 }
 
-export type FormData = Omit<Patient, 'id'>
+export type PatientDraft = Omit<Patient, 'id'>

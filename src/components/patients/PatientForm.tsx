@@ -1,11 +1,11 @@
-import type { FormData } from '@/types'
+import type { PatientDraft } from '@/types'
 import { useForm } from 'react-hook-form'
 
 interface Props {
   mode: 'create' | 'edit'
-  onSubmit: (data: FormData) => void
+  onSubmit: (data: PatientDraft) => void
   onCancel?: () => void
-  defaultValues?: Partial<FormData>
+  defaultValues?: Partial<PatientDraft>
 }
 
 export default function PatientForm({ mode, onSubmit, onCancel, defaultValues }: Props) {
@@ -13,7 +13,7 @@ export default function PatientForm({ mode, onSubmit, onCancel, defaultValues }:
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({
+  } = useForm<PatientDraft>({
     defaultValues: defaultValues || {
       name: '',
       age: 30,
@@ -21,7 +21,7 @@ export default function PatientForm({ mode, onSubmit, onCancel, defaultValues }:
     },
   })
 
-  const onSubmitForm = (data: FormData) => {
+  const onSubmitForm = (data: PatientDraft) => {
     onSubmit({
       ...data,
       age: Number(data.age),
@@ -29,7 +29,7 @@ export default function PatientForm({ mode, onSubmit, onCancel, defaultValues }:
   }
 
   return (
-    <div className="rounded-lg bg-white p-6 shadow-sm mb-8">
+    <div className="mb-8 rounded-lg bg-white p-6 shadow-sm">
       <h2 className="mb-4 text-xl font-bold">
         {mode === 'create' ? 'Add New Patient' : 'Edit Patient'}
       </h2>
