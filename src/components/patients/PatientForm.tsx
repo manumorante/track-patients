@@ -1,4 +1,4 @@
-import { useCreatePatient, useUpdatePatient } from '@/hooks'
+import { useCreatePatient, useDeletePatient, useUpdatePatient } from '@/hooks'
 import { usePatientsStore } from '@/stores/patientsStore'
 import type { PatientDraft } from '@/types'
 import { useForm } from 'react-hook-form'
@@ -7,6 +7,7 @@ export default function PatientForm() {
   const { editingPatientId, closeForm } = usePatientsStore()
   const createPatient = useCreatePatient()
   const updatePatient = useUpdatePatient()
+  const deletePatient = useDeletePatient()
 
   // Get the current patient being edited from the store
   const editingPatient = usePatientsStore((state) =>
@@ -39,6 +40,12 @@ export default function PatientForm() {
     } else {
       createPatient.mutate(formattedData)
     }
+    closeForm()
+  }
+
+  const handleDelete = () => {
+    if (!editingPatientId) return
+    deletePatient.mutate(editingPatientId)
     closeForm()
   }
 
@@ -87,9 +94,15 @@ export default function PatientForm() {
         </div>
 
         <div className="flex justify-between">
-          <button className="button danger">Delete</button>
+          <div>
+            {editingPatientId && (
+              <button type="button" onClick={handleDelete} className="button danger">
+                Delete
+              </button>
+            )}
+          </div>
           <div className="space-x-3">
-            <button onClick={closeForm} className="button secondary">
+            <button type="button" onClick={closeForm} className="button secondary">
               Cancel
             </button>
 
