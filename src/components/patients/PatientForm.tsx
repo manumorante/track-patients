@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { useCreatePatient, useUpdatePatient } from '@/hooks'
 import { usePatientsStore } from '@/stores/patientsStore'
 import type { PatientDraft } from '@/types'
@@ -52,17 +53,13 @@ export default function PatientForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">Name</label>
-          <input
-            type="text"
-            {...register('name', { required: 'Name is required' })}
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-          />
+          <Input type="text" {...register('name', { required: 'Name is required' })} />
           {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Age</label>
-          <input
+          <Input
             type="number"
             {...register('age', {
               required: 'Age is required',
@@ -70,17 +67,15 @@ export default function PatientForm() {
               max: { value: 120, message: 'Age must be less than 120' },
               valueAsNumber: true,
             })}
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
           />
           {errors.age && <p className="mt-1 text-sm text-red-600">{errors.age.message}</p>}
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Primary Condition</label>
-          <input
+          <Input
             type="text"
             {...register('primaryCondition', { required: 'Primary condition is required' })}
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
           />
           {errors.primaryCondition && (
             <p className="mt-1 text-sm text-red-600">{errors.primaryCondition.message}</p>
