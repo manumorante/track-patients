@@ -6,7 +6,7 @@ import {
   getPatients,
   resetPatients,
   updatePatient,
-} from '@/services/api'
+} from '@/api/patients'
 import type { Patient } from '@/types'
 
 // Queries
