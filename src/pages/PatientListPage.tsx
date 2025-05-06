@@ -9,12 +9,11 @@ export default function PatientListPage() {
 
   return (
     <>
-      <div className="mb-8 space-y-4">
-        <h1 className="text-2xl font-bold">Patients</h1>
-        <div className="flex items-center gap-3">
-          <PatientsSearch />
-          <Button onClick={() => openForm()}>Add Patient</Button>
-        </div>
+      <h1 className="mb-4 text-3xl">Patients</h1>
+
+      <div className="mb-8 flex items-center gap-3">
+        <PatientsSearch className="flex-1" />
+        <Button onClick={() => openForm()}>Add Patient</Button>
       </div>
 
       <PatientFormDialog />
