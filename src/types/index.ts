@@ -6,3 +6,11 @@ export type Patient = {
 }
 
 export type PatientDraft = Omit<Patient, 'id'>
+
+export type Note = {
+  id: string
+  patientId: string
+  text: string
+  createdAt: string
+  updatedAt: string
+}
