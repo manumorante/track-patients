@@ -1,6 +1,5 @@
 import type { FormData } from '@/types'
 import { useForm } from 'react-hook-form'
-import { Card } from '@/components/ui'
 
 interface Props {
   mode: 'create' | 'edit'
@@ -30,7 +29,7 @@ export default function PatientForm({ mode, onSubmit, onCancel, defaultValues }:
   }
 
   return (
-    <Card className="mb-8">
+    <div className="rounded-lg bg-white p-6 shadow-sm mb-8">
       <h2 className="mb-4 text-xl font-bold">
         {mode === 'create' ? 'Add New Patient' : 'Edit Patient'}
       </h2>
@@ -86,6 +85,6 @@ export default function PatientForm({ mode, onSubmit, onCancel, defaultValues }:
           </button>
         </div>
       </form>
-    </Card>
+    </div>
   )
 }
