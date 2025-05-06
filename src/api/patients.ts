@@ -1,66 +1,61 @@
+import { patients as initialPatients } from '@/data/patients'
 import { usePatientsStore } from '@/stores/patientsStore'
 import type { Patient } from '@/types'
-import { patients as initialPatients } from '@/data/patients'
 
 const delay = () => new Promise((resolve) => setTimeout(resolve, 500))
+const getStore = () => usePatientsStore.getState()
 
-// Simulated API calls that use localStorage through Zustand
-export async function getPatients(): Promise<Patient[]> {
-  await delay()
-  return usePatientsStore.getState().patients
-}
+export const api = {
+  async getAll(): Promise<Patient[]> {
+    await delay()
+    return getStore().patients
+  },
 
-export async function searchPatients(query: string): Promise<Patient[]> {
-  await delay()
-  const search = query.toLowerCase().trim()
+  async search(query: string): Promise<Patient[]> {
+    await delay()
+    if (!query?.trim() || query.length < 3) return getStore().patients
 
-  if (!search || search.length < 3) {
-    return usePatientsStore.getState().patients
-  }
+    const search = query.toLowerCase()
+    return getStore().patients.filter(
+      (p) =>
+        p.name.toLowerCase().includes(search) || p.primaryCondition.toLowerCase().includes(search),
+    )
+  },
 
-  return usePatientsStore.getState().patients.filter((patient) => {
-    const name = patient.name.toLowerCase()
-    const condition = patient.primaryCondition.toLowerCase()
-    return name.includes(search) || condition.includes(search)
-  })
-}
+  async getOne(id: string): Promise<Patient> {
+    await delay()
+    const patient = getStore().patients.find((p) => p.id === id)
+    if (!patient) throw new Error('Patient not found')
+    return patient
+  },
 
-export async function getPatient(id: string): Promise<Patient> {
-  await delay()
-  const patient = usePatientsStore.getState().patients.find((p) => p.id === id)
-  if (!patient) throw new Error('Patient not found')
-  return patient
-}
+  async create(data: Omit<Patient, 'id'>): Promise<Patient> {
+    await delay()
+    const store = getStore()
+    const patient = { ...data, id: crypto.randomUUID() }
+    store.setPatients([...store.patients, patient])
+    return patient
+  },
 
-export async function createPatient(data: Omit<Patient, 'id'>): Promise<Patient> {
-  await delay()
-  const store = usePatientsStore.getState()
-  const newPatient = { ...data, id: crypto.randomUUID() }
+  async update(id: string, data: Partial<Patient>): Promise<Patient> {
+    await delay()
+    const store = getStore()
+    const patients = store.patients.map((p) => (p.id === id ? { ...p, ...data } : p))
+    store.setPatients(patients)
+    const patient = patients.find((p) => p.id === id)
+    if (!patient) throw new Error('Patient not found')
+    return patient
+  },
 
-  store.setPatients([...store.patients, newPatient])
-  return newPatient
-}
+  async delete(id: string): Promise<void> {
+    await delay()
+    const store = getStore()
+    store.setPatients(store.patients.filter((p) => p.id !== id))
+  },
 
-export async function updatePatient(id: string, data: Partial<Patient>): Promise<Patient> {
-  await delay()
-  const store = usePatientsStore.getState()
-  const updatedPatients = store.patients.map((p) => (p.id === id ? { ...p, ...data } : p))
-
-  store.setPatients(updatedPatients)
-  const updated = updatedPatients.find((p) => p.id === id)
-  if (!updated) throw new Error('Patient not found')
-  return updated
-}
-
-export async function deletePatient(id: string): Promise<void> {
-  await delay()
-  const store = usePatientsStore.getState()
-  store.setPatients(store.patients.filter((p) => p.id !== id))
-}
-
-export async function resetPatients(): Promise<Patient[]> {
-  await delay()
-  const store = usePatientsStore.getState()
-  store.setPatients(initialPatients)
-  return initialPatients
+  async reset(): Promise<Patient[]> {
+    await delay()
+    getStore().setPatients(initialPatients)
+    return initialPatients
+  },
 }
