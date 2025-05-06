@@ -1,4 +1,4 @@
-import { LoadingFallback } from '@/components/common/LoadingFallback'
+import { LoadingFallback } from '@/components/common/LoadingFallback/LoadingFallback'
 import { MainLayout } from '@/layouts'
 import { lazy, Suspense } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
