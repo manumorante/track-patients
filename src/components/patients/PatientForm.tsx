@@ -2,6 +2,13 @@ import { useCreatePatient, useDeletePatient, useUpdatePatient } from '@/hooks'
 import { usePatientsStore } from '@/stores/patientsStore'
 import type { PatientDraft } from '@/types'
 import { useForm } from 'react-hook-form'
+import { validation } from './validation'
+
+const DEFAULT_PATIENT: PatientDraft = {
+  name: '',
+  age: 30,
+  primaryCondition: '',
+} as const
 
 export default function PatientForm() {
   const { editingPatientId, closeForm } = usePatientsStore()
@@ -17,13 +24,9 @@ export default function PatientForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<PatientDraft>({
-    defaultValues: editingPatient || {
-      name: '',
-      age: 30,
-      primaryCondition: '',
-    },
+    defaultValues: editingPatient || DEFAULT_PATIENT,
   })
 
   const onSubmit = (data: PatientDraft) => {
@@ -57,36 +60,30 @@ export default function PatientForm() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">Name</label>
-          <input
-            type="text"
-            className="input"
-            {...register('name', { required: 'Name is required' })}
-          />
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            Name
+          </label>
+          <input id="name" type="text" className="input" {...register('name', validation.name)} />
           {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Age</label>
-          <input
-            type="number"
-            className="input"
-            {...register('age', {
-              required: 'Age is required',
-              min: { value: 0, message: 'Age must be positive' },
-              max: { value: 120, message: 'Age must be less than 120' },
-              valueAsNumber: true,
-            })}
-          />
+          <label htmlFor="age" className="block text-sm font-medium text-gray-700">
+            Age
+          </label>
+          <input id="age" type="number" className="input" {...register('age', validation.age)} />
           {errors.age && <p className="mt-1 text-sm text-red-600">{errors.age.message}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Primary Condition</label>
+          <label htmlFor="condition" className="block text-sm font-medium text-gray-700">
+            Primary Condition
+          </label>
           <input
+            id="condition"
             type="text"
             className="input"
-            {...register('primaryCondition', { required: 'Primary condition is required' })}
+            {...register('primaryCondition', validation.primaryCondition)}
           />
           {errors.primaryCondition && (
             <p className="mt-1 text-sm text-red-600">{errors.primaryCondition.message}</p>
@@ -106,7 +103,7 @@ export default function PatientForm() {
               Cancel
             </button>
 
-            <button type="submit" disabled={isSubmitting} className="button">
+            <button type="submit" disabled={isSubmitting || !isDirty} className="button">
               {isSubmitting ? 'Saving...' : 'Save'}
             </button>
           </div>
