@@ -1,8 +1,9 @@
+export { useDebounce } from './useDebounce'
 export {
   usePatients,
   usePatient,
   useCreatePatient,
   useUpdatePatient,
   useDeletePatient,
-  useResetPatients,
 } from './usePatients'
+export { useSearchPatients } from './useSearchPatients'

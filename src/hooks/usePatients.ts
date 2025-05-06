@@ -52,14 +52,3 @@ export function useDeletePatient() {
     },
   })
 }
-
-export function useResetPatients() {
-  const queryClient = useQueryClient()
-
-  return useMutation({
-    mutationFn: api.reset,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['patients'] })
-    },
-  })
-}
