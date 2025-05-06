@@ -6,7 +6,7 @@ type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & {
   onChange: (value: string) => void
 }
 
-export default function SearchInput({ value, onChange, className, ...props }: Props) {
+export default function PatientsSearch({ value, onChange, className, ...props }: Props) {
   return (
     <input
       type="text"

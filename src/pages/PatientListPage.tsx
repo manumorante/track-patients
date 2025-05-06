@@ -1,5 +1,5 @@
-import { Button, PatientForm, SearchInput } from '@/components'
-import { PatientCard } from '@/components/PatientCard'
+import { Button } from '@/components/ui'
+import { PatientCard, PatientForm, PatientsSearch } from '@/components/patients'
 import { useCreatePatient, useDeletePatient, useResetPatients, useUpdatePatient } from '@/hooks'
 import { useSearchPatients } from '@/hooks/useSearchPatients'
 import { useUIStore } from '@/stores/uiStore'
@@ -30,7 +30,7 @@ export default function PatientListPage() {
       <div className="mb-8 space-y-4">
         <h1 className="text-2xl font-bold">Patients</h1>
         <div className="flex items-center justify-between">
-          <SearchInput
+          <PatientsSearch
             value={query}
             onChange={setQuery}
             placeholder="Search by patient name..."

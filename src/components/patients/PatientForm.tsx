@@ -1,7 +1,6 @@
 import type { FormData } from '@/types'
 import { useForm } from 'react-hook-form'
-import Button from './Button'
-import Card from './Card'
+import { Button, Card } from '@/components/ui'
 
 interface Props {
   mode: 'create' | 'edit'
