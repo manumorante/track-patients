@@ -1,6 +1,6 @@
 import type { FormData } from '@/types'
 import { useForm } from 'react-hook-form'
-import { Button, Card } from '@/components/ui'
+import { Card } from '@/components/ui'
 
 interface Props {
   mode: 'create' | 'edit'
@@ -77,13 +77,13 @@ export default function PatientForm({ mode, onSubmit, onCancel, defaultValues }:
 
         <div className="flex justify-end gap-2">
           {onCancel && (
-            <Button type="button" onClick={onCancel} variant="secondary">
+            <button type="button" onClick={onCancel}>
               Cancel
-            </Button>
+            </button>
           )}
-          <Button type="submit" disabled={isSubmitting}>
+          <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Saving...' : 'Save Patient'}
-          </Button>
+          </button>
         </div>
       </form>
     </Card>

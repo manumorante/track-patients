@@ -1,5 +1,4 @@
-import { Button } from '@/components/ui'
-import { PatientCard, PatientForm, PatientsSearch } from '@/components/patients'
+import { PatientsSearch, PatientCard, PatientForm } from '@/components/patients'
 import { useCreatePatient, useDeletePatient, useResetPatients, useUpdatePatient } from '@/hooks'
 import { useSearchPatients } from '@/hooks/useSearchPatients'
 import { useUIStore } from '@/stores/uiStore'
@@ -36,7 +35,9 @@ export default function PatientListPage() {
             placeholder="Search by patient name..."
             className="max-w-lg"
           />
-          <Button onClick={() => setFormMode({ type: 'create' })}>Add Patient</Button>
+          <button type="button" onClick={() => setFormMode({ type: 'create' })}>
+            Add Patient
+          </button>
         </div>
       </div>
 
@@ -56,9 +57,9 @@ export default function PatientListPage() {
           <>
             <div className="text-gray-500">No patients found</div>
 
-            <Button variant="secondary" onClick={() => resetPatients.mutate()} className="ml-2">
+            <button type="button" onClick={() => resetPatients.mutate()}>
               Reset data
-            </Button>
+            </button>
           </>
         ) : (
           patients?.map((patient) => (

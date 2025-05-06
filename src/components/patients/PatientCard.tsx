@@ -1,5 +1,4 @@
 import type { Patient } from '@/types'
-import { Button } from '@/components/ui'
 
 interface Props {
   patient: Patient
@@ -18,12 +17,12 @@ export default function PatientCard({ patient, onEdit, onDelete }: Props) {
       </div>
 
       <div className="flex gap-2">
-        <Button variant="secondary" onClick={() => onEdit(patient)}>
+        <button type="button" onClick={() => onEdit(patient)}>
           Edit
-        </Button>
-        <Button variant="secondary" onClick={() => onDelete(patient.id)}>
+        </button>
+        <button type="button" onClick={() => onDelete(patient.id)}>
           Delete
-        </Button>
+        </button>
       </div>
     </div>
   )
