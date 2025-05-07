@@ -32,9 +32,9 @@ export default function PatientDetailPage() {
         Back
       </button>
 
-      <div className="flex flex-col items-start gap-4 sm:flex-row">
-        <Card className="min-w-70 flex-1 space-y-4 p-8">
-          <h1 className="text-3xl">{patient.name}</h1>
+      <div className="flex flex-col items-start gap-6 md:flex-row">
+        <Card className="Profile w-full min-w-80 flex-1 space-y-4 p-6 md:w-auto md:p-8">
+          <h1 className="text-2xl md:text-3xl">{patient.name}</h1>
           <p className="text-gray-400">
             Age: <div className="text-lg text-gray-600">{patient.age} year old</div>
           </p>
@@ -45,7 +45,7 @@ export default function PatientDetailPage() {
           </p>
         </Card>
 
-        <div className="w-96 rounded-lg border border-zinc-300 bg-zinc-200/60 p-6">
+        <div className="Notes mt-0.5 w-full rounded-lg border border-zinc-300 bg-zinc-200/50 p-6 md:max-w-96 md:min-w-50">
           <h2 className="mb-4 text-lg font-medium text-zinc-600">Notes</h2>
 
           <NotesList patientId={id} />

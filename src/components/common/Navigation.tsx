@@ -9,7 +9,7 @@ const navItems = [
 ]
 
 const getNavLinkClass = (isActive: boolean) =>
-  cx('flex items-center gap-2', isActive ? 'text-black' : 'text-gray-500')
+  cx('flex items-center gap-2 text-base', isActive ? 'text-black' : 'text-gray-500')
 
 export default function Navigation() {
   return (
