@@ -18,11 +18,11 @@ export default function NoteCard({ note }: Props) {
 
   return (
     <Card className="p-4">
-      <div className="flex justify-between">
+      <div className="flex items-start justify-between">
         <p className="text-gray-800">{note.text}</p>
         <button
           onClick={handleDelete}
-          className="ml-2 text-gray-500 transition-colors hover:text-red-500"
+          className="mt-1 ml-3 cursor-pointer text-gray-500 transition-colors hover:text-red-500"
           title="Delete note">
           <TrashIcon className="h-5 w-5" />
         </button>
