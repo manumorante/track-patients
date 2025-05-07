@@ -24,16 +24,21 @@ export default function PatientDetailPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-3xl">Patient Details</h1>
-      <div className="space-y-4">
-        <div>
-          <h2 className="text-xl font-semibold">{patient.name}</h2>
-          <p className="text-gray-600">Age: {patient.age}</p>
-          <p className="text-gray-600">Primary Condition: {patient.primaryCondition}</p>
+      <div className="mb-4 flex flex-col gap-4 sm:flex-row">
+        <div className="flex-1 space-y-4">
+          <h1 className="text-3xl">{patient.name}</h1>
+          <p className="text-gray-400">
+            Age: <div className="text-lg text-gray-600">{patient.age} year old</div>
+          </p>
+
+          <p className="text-gray-400">
+            Primary Condition:{' '}
+            <div className="text-lg text-gray-600">{patient.primaryCondition}</div>
+          </p>
         </div>
 
-        <div className="mt-8">
-          <h2 className="mb-4 text-xl font-semibold">Patient Notes</h2>
+        <div className="w-96">
+          <h2 className="mb-4 text-lg font-medium">Patient Notes</h2>
           <PatientNotes patientId={id} />
         </div>
       </div>
