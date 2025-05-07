@@ -3,13 +3,6 @@ import { api } from '@/api/patients'
 import type { Patient } from '@/types'
 
 // Queries
-export function usePatients() {
-  return useQuery({
-    queryKey: ['patients'],
-    queryFn: api.getAll,
-  })
-}
-
 export function usePatient(id: string) {
   return useQuery({
     queryKey: ['patient', id],

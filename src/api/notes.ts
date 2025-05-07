@@ -1,4 +1,3 @@
-import { notes as initialNotes } from '@/data/notes'
 import { delay } from '@/api/utils'
 import { useAppStore } from '@/stores/appStore'
 import type { Note } from '@/types'
@@ -58,11 +57,5 @@ export const api = {
     await delay()
     const state = store.getState()
     state.setNotes(state.notes.filter((n: Note) => n.id !== id))
-  },
-
-  async reset(): Promise<Note[]> {
-    await delay()
-    store.getState().setNotes(initialNotes)
-    return initialNotes
   },
 }

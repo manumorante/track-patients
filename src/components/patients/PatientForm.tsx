@@ -8,6 +8,7 @@ const DEFAULT_PATIENT: PatientDraft = {
   name: '',
   age: 30,
   primaryCondition: '',
+  createdAt: new Date().toISOString(),
 } as const
 
 export default function PatientForm() {

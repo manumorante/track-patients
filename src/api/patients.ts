@@ -1,4 +1,3 @@
-import { patients as initialPatients } from '@/data/patients'
 import { delay } from '@/api/utils'
 import { useAppStore } from '@/stores/appStore'
 import type { Patient } from '@/types'
@@ -7,23 +6,27 @@ import { v4 as uuid } from 'uuid'
 const store = useAppStore
 
 export const api = {
-  async getAll(): Promise<Patient[]> {
-    await delay()
-    return store.getState().patients
+  _sortPatients(patients: Patient[]): Patient[] {
+    return patients.sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    )
   },
 
   async search(query: string): Promise<Patient[]> {
     await delay()
-    if (!query?.trim() || query.length < 2) return store.getState().patients
+    const patients = store.getState().patients
 
-    const search = query.toLowerCase()
-    return store
-      .getState()
-      .patients.filter(
-        (p: Patient) =>
-          p.name.toLowerCase().includes(search) ||
-          p.primaryCondition.toLowerCase().includes(search),
-      )
+    if (!query?.trim() || query.length < 2) {
+      return this._sortPatients(patients)
+    }
+
+    const search = query.toLowerCase().trim()
+    const filteredPatients = patients.filter(
+      (p: Patient) =>
+        p.name.toLowerCase().includes(search) || p.primaryCondition.toLowerCase().includes(search),
+    )
+
+    return this._sortPatients(filteredPatients)
   },
 
   async getOne(id: string): Promise<Patient> {
@@ -55,11 +58,5 @@ export const api = {
     await delay()
     const state = store.getState()
     state.setPatients(state.patients.filter((p: Patient) => p.id !== id))
-  },
-
-  async reset(): Promise<Patient[]> {
-    await delay()
-    store.getState().setPatients(initialPatients)
-    return initialPatients
   },
 }
