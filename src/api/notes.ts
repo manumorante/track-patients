@@ -1,9 +1,9 @@
 import { delay } from '@/api/utils'
-import { useAppStore } from '@/stores/appStore'
+import { useNotesStore } from '@/stores/notesStore'
 import type { Note } from '@/types'
 import { v4 as uuid } from 'uuid'
 
-const store = useAppStore
+const store = useNotesStore
 
 export const api = {
   async getAll(): Promise<Note[]> {

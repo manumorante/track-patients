@@ -1,7 +1,7 @@
 import { useNotes } from '@/hooks/useNotes'
 import NoteCard from './NoteCard'
 
-export default function PatientNotes({ patientId }: { patientId: string }) {
+export default function NotesList({ patientId }: { patientId: string }) {
   const { data: notes, isLoading, error } = useNotes(patientId)
 
   if (isLoading) {

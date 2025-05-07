@@ -1,4 +1,4 @@
-import { useAppStore } from '@/stores/appStore'
+import { usePatientsStore } from '@/stores/patientsStore'
 import type { Patient } from '@/types'
 import { Link } from 'react-router-dom'
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function PatientCard({ patient }: Props) {
-  const { openForm } = useAppStore()
+  const editForm = usePatientsStore((state) => state.editForm)
 
   return (
     <div className="flex items-center justify-between rounded-lg border border-zinc-200 bg-white p-4">
@@ -18,7 +18,7 @@ export default function PatientCard({ patient }: Props) {
         </p>
       </Link>
 
-      <button className="button secondary" onClick={() => openForm(patient.id)}>
+      <button className="button secondary" onClick={() => editForm(patient.id)}>
         Edit
       </button>
     </div>

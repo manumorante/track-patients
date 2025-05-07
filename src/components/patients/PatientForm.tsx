@@ -1,4 +1,4 @@
-import { useAppStore } from '@/stores/appStore'
+import { usePatientsStore } from '@/stores/patientsStore'
 import { useCreatePatient, useDeletePatient, useUpdatePatient } from '@/hooks/usePatients'
 import type { PatientDraft } from '@/types'
 import { useForm } from 'react-hook-form'
@@ -12,13 +12,13 @@ const DEFAULT_PATIENT: PatientDraft = {
 } as const
 
 export default function PatientForm() {
-  const closeForm = useAppStore((state) => state.closeForm)
-  const editingId = useAppStore((state) => state.editingId)
+  const closeForm = usePatientsStore((state) => state.closeForm)
+  const editingId = usePatientsStore((state) => state.editingId)
   const createPatient = useCreatePatient()
   const updatePatient = useUpdatePatient()
   const deletePatient = useDeletePatient()
 
-  const editingPatient = useAppStore((state) => state.patients.find((p) => p.id === editingId))
+  const editingPatient = usePatientsStore((state) => state.patients.find((p) => p.id === editingId))
 
   const {
     register,
@@ -35,10 +35,7 @@ export default function PatientForm() {
     }
 
     if (editingId) {
-      updatePatient.mutate({
-        id: editingId,
-        patient: formattedData,
-      })
+      updatePatient.mutate({ id: editingId, patient: formattedData })
     } else {
       createPatient.mutate(formattedData)
     }

@@ -1,2 +1,2 @@
 export { default as NoteCard } from './NoteCard'
-export { default as PatientNotes } from './PatientNotes'
+export { default as NotesList } from './NotesList'

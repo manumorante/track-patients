@@ -1,8 +1,9 @@
-import { useAppStore } from '@/stores/appStore'
+import { usePatientsStore } from '@/stores/patientsStore'
 import type { ChangeEvent } from 'react'
 
 export default function PatientsSearch() {
-  const { searchQuery, setSearchQuery } = useAppStore()
+  const searchQuery = usePatientsStore((state) => state.searchQuery)
+  const setSearchQuery = usePatientsStore((state) => state.setSearchQuery)
 
   return (
     <input

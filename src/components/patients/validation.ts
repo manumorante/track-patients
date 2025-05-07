@@ -1,4 +1,3 @@
-// Validation rules for the patient form
 export const validation = {
   name: {
     required: 'This field is required',

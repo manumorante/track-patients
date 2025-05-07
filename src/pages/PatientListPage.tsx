@@ -1,9 +1,11 @@
 import { PatientCard, PatientFormDialog, PatientsSearch } from '@/components/patients'
 import { useSearchPatients } from '@/hooks/useSearchPatients'
-import { useAppStore } from '@/stores/appStore'
+import { usePatientsStore } from '@/stores/patientsStore'
 
 export default function PatientListPage() {
-  const { openForm, searchQuery } = useAppStore()
+  const addForm = usePatientsStore((state) => state.addForm)
+  const searchQuery = usePatientsStore((state) => state.searchQuery)
+  const isFormOpen = usePatientsStore((state) => state.isFormOpen)
   const { results: patients, isLoading } = useSearchPatients(searchQuery)
 
   return (
@@ -14,7 +16,7 @@ export default function PatientListPage() {
         <div className="flex-1">
           <PatientsSearch />
         </div>
-        <button className="button" onClick={() => openForm()}>
+        <button className="button" onClick={() => addForm()} disabled={isFormOpen}>
           Add Patient
         </button>
       </div>

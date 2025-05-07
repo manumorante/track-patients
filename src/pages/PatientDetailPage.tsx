@@ -1,4 +1,4 @@
-import { PatientNotes } from '@/components/notes'
+import { NotesList } from '@/components/notes'
 import { usePatient } from '@/hooks/usePatients'
 import { useParams } from 'react-router-dom'
 
@@ -39,7 +39,10 @@ export default function PatientDetailPage() {
 
         <div className="w-96">
           <h2 className="mb-4 text-lg font-medium">Patient Notes</h2>
-          <PatientNotes patientId={id} />
+
+          NoteFormDialog
+
+          <NotesList patientId={id} />
         </div>
       </div>
     </div>

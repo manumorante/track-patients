@@ -1,9 +1,9 @@
 import { delay } from '@/api/utils'
-import { useAppStore } from '@/stores/appStore'
+import { usePatientsStore } from '@/stores/patientsStore'
 import type { Patient } from '@/types'
 import { v4 as uuid } from 'uuid'
 
-const store = useAppStore
+const store = usePatientsStore
 
 export const api = {
   _sortPatients(patients: Patient[]): Patient[] {
