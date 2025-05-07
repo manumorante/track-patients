@@ -1,8 +1,9 @@
 import { useSearchPatients } from '@/hooks'
 import { usePatientsStore } from '@/stores/patientsStore'
-import { useMemo } from 'react'
 import cx from 'clsx'
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import Card from '../common/Card'
 
 export default function PatientsList() {
   const searchQuery = usePatientsStore((state) => state.searchQuery)
@@ -19,7 +20,7 @@ export default function PatientsList() {
       {isLoading && <div className="text-gray-500">Searching...</div>}
       {!hasResults && <div className="text-gray-500">No results found.</div>}
       {hasResults && !isLoading && (
-        <div className="w-full overflow-hidden rounded-lg border border-zinc-200 shadow-xs">
+        <Card className="w-full overflow-hidden">
           <table className="w-full table-auto">
             <thead className="border-b border-zinc-200 bg-zinc-50">
               <tr>
@@ -41,7 +42,7 @@ export default function PatientsList() {
               ))}
             </tbody>
           </table>
-        </div>
+        </Card>
       )}
     </div>
   )

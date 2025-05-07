@@ -1,4 +1,15 @@
 import { NavLink } from 'react-router-dom'
+import { UsersIcon, HomeIcon, DocumentTextIcon } from '@heroicons/react/24/outline'
+import cx from 'clsx'
+
+const navItems = [
+  { to: '/', label: 'Home', icon: HomeIcon },
+  { to: '/patients', label: 'Patients', icon: UsersIcon },
+  { to: '/notes', label: 'Last Notes', icon: DocumentTextIcon },
+]
+
+const getNavLinkClass = (isActive: boolean) =>
+  cx('flex items-center gap-2', isActive ? 'text-black' : 'text-gray-500')
 
 export default function Navigation() {
   return (
@@ -9,16 +20,13 @@ export default function Navigation() {
           <span className="font-black">Patients</span>
         </NavLink>
 
-        <nav className="flex flex-col gap-4 border-t pt-6 text-sm text-gray-500">
-          <NavLink to="/" className={({ isActive }) => (isActive ? 'text-black' : '')}>
-            Home
-          </NavLink>
-          <NavLink to="/patients" className={({ isActive }) => (isActive ? 'text-black' : '')}>
-            Patients
-          </NavLink>
-          <NavLink to="/notes" className={({ isActive }) => (isActive ? 'text-black' : '')}>
-            Last Notes
-          </NavLink>
+        <nav className="flex flex-col gap-4 border-t pt-6 text-sm">
+          {navItems.map(({ to, label, icon: Icon }) => (
+            <NavLink key={to} to={to} className={({ isActive }) => getNavLinkClass(isActive)}>
+              <Icon className="h-4 w-4" />
+              {label}
+            </NavLink>
+          ))}
         </nav>
       </div>
     </div>

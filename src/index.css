@@ -10,10 +10,6 @@
 }
 
 @layer components {
-  .pageTitle {
-    @apply mb-4 text-2xl font-bold;
-  }
-
   .input {
     @apply flex h-9 w-full rounded-md border bg-white px-3 py-1 text-sm ring-zinc-500 placeholder:text-zinc-400 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50;
   }
@@ -24,7 +20,7 @@
   }
 
   .button.secondary {
-    @apply border bg-zinc-50 font-medium text-zinc-700 hover:border-zinc-300 hover:bg-white hover:text-zinc-800;
+    @apply border-zinc-2 00 border bg-zinc-50 font-medium text-zinc-700 hover:border-zinc-300 hover:bg-white hover:text-zinc-800;
   }
 
   .button.danger {
