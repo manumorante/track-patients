@@ -10,12 +10,7 @@ export function useNotes(patientId?: string) {
   })
 }
 
-export function useNote(id: string) {
-  return useQuery({
-    queryKey: ['note', id],
-    queryFn: () => api.getOne(id),
-  })
-}
+
 
 // Mutations
 export function useCreateNote() {

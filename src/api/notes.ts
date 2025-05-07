@@ -1,46 +1,35 @@
 import { delay } from '@/api/utils'
 import { useNotesStore } from '@/stores/notesStore'
-import type { Note } from '@/types'
+import type { Note, NoteDraft } from '@/types'
 import { v4 as uuid } from 'uuid'
 
 const store = useNotesStore
 
 export const api = {
+  _sortNotes(notes: Note[]): Note[] {
+    return notes.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+  },
+
   async getAll(): Promise<Note[]> {
     await delay()
-    return store.getState().notes
+    return this._sortNotes(store.getState().notes)
   },
 
   async getByPatientId(patientId: string): Promise<Note[]> {
     await delay()
-    return store.getState().notes.filter((n: Note) => n.patientId === patientId)
+    return this._sortNotes(store.getState().notes.filter((n: Note) => n.patientId === patientId))
   },
 
-  async getOne(id: string): Promise<Note> {
-    await delay()
-    const note = store.getState().notes.find((n: Note) => n.id === id)
-    if (!note) throw new Error('Note not found')
-    return note
-  },
-
-  async create(data: Omit<Note, 'id' | 'createdAt' | 'updatedAt'>): Promise<Note> {
+  async create(data: NoteDraft): Promise<Note> {
     await delay()
     const state = store.getState()
     const now = new Date().toISOString()
-    const note = {
-      ...data,
-      id: uuid(),
-      createdAt: now,
-      updatedAt: now,
-    }
+    const note = { ...data, id: uuid(), createdAt: now }
     state.setNotes([...state.notes, note])
     return note
   },
 
-  async update(
-    id: string,
-    data: Partial<Omit<Note, 'id' | 'createdAt' | 'updatedAt'>>,
-  ): Promise<Note> {
+  async update(id: string, data: Partial<NoteDraft>): Promise<Note> {
     await delay()
     const state = store.getState()
     const now = new Date().toISOString()
