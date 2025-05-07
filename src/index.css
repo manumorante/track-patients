@@ -20,7 +20,7 @@
   }
 
   .button.secondary {
-    @apply border-zinc-2 00 border bg-zinc-50 font-medium text-zinc-700 hover:border-zinc-300 hover:bg-white hover:text-zinc-800;
+    @apply border border-zinc-200 bg-zinc-50 font-medium text-zinc-700 hover:border-zinc-300 hover:bg-white hover:text-zinc-800;
   }
 
   .button.danger {

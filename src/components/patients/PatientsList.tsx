@@ -42,7 +42,7 @@ export default function PatientsList() {
                   </td>
                   <td className={css.td}>{patient.age} years</td>
                   <td className={css.td}>{patient.primaryCondition}</td>
-                  <td className={css.td}>
+                  <td className={cx(css.td, 'w-30')}>
                     <button className="button secondary" onClick={() => editForm(patient.id)}>
                       Edit
                     </button>
