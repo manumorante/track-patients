@@ -1,16 +1,14 @@
-import { PatientCard, PatientFormDialog, PatientsSearch } from '@/components/patients'
-import { useSearchPatients } from '@/hooks/useSearchPatients'
+import { PatientFormDialog, PatientsSearch } from '@/components/patients'
+import PatientsList from '@/components/patients/PatientsList'
 import { usePatientsStore } from '@/stores/patientsStore'
 
 export default function PatientListPage() {
   const addForm = usePatientsStore((state) => state.addForm)
-  const searchQuery = usePatientsStore((state) => state.searchQuery)
   const isFormOpen = usePatientsStore((state) => state.isFormOpen)
-  const { results: patients, isLoading } = useSearchPatients(searchQuery)
 
   return (
     <>
-      <h1 className="mb-4 text-xl">Patients</h1>
+      <h1 className="mb-4 text-2xl font-bold">Patients</h1>
 
       <div className="mb-8 flex items-center gap-3">
         <div className="flex-1">
@@ -22,16 +20,7 @@ export default function PatientListPage() {
       </div>
 
       <PatientFormDialog />
-
-      <div className="space-y-3">
-        {isLoading ? (
-          <div className="text-gray-500">Searching...</div>
-        ) : patients?.length === 0 ? (
-          <div className="text-gray-500">No patients found</div>
-        ) : (
-          patients?.map((patient) => <PatientCard key={patient.id} patient={patient} />)
-        )}
-      </div>
+      <PatientsList />
     </>
   )
 }
