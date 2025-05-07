@@ -1,10 +1,10 @@
 import { patients as initialPatients } from '@/data/patients'
-import { usePatientsStore } from '@/stores/patientsStore'
+import { delay } from '@/api/utils'
+import { useAppStore } from '@/stores/appStore'
 import type { Patient } from '@/types'
 import { v4 as uuid } from 'uuid'
 
-const delay = () => new Promise((resolve) => setTimeout(resolve, 500))
-const store = usePatientsStore
+const store = useAppStore
 
 export const api = {
   async getAll(): Promise<Patient[]> {
@@ -20,7 +20,7 @@ export const api = {
     return store
       .getState()
       .patients.filter(
-        (p) =>
+        (p: Patient) =>
           p.name.toLowerCase().includes(search) ||
           p.primaryCondition.toLowerCase().includes(search),
       )
@@ -28,7 +28,7 @@ export const api = {
 
   async getOne(id: string): Promise<Patient> {
     await delay()
-    const patient = store.getState().patients.find((p) => p.id === id)
+    const patient = store.getState().patients.find((p: Patient) => p.id === id)
     if (!patient) throw new Error('Patient not found')
     return patient
   },
@@ -44,9 +44,9 @@ export const api = {
   async update(id: string, data: Partial<Patient>): Promise<Patient> {
     await delay()
     const state = store.getState()
-    const patients = state.patients.map((p) => (p.id === id ? { ...p, ...data } : p))
+    const patients = state.patients.map((p: Patient) => (p.id === id ? { ...p, ...data } : p))
     state.setPatients(patients)
-    const patient = patients.find((p) => p.id === id)
+    const patient = patients.find((p: Patient) => p.id === id)
     if (!patient) throw new Error('Patient not found')
     return patient
   },
@@ -54,7 +54,7 @@ export const api = {
   async delete(id: string): Promise<void> {
     await delay()
     const state = store.getState()
-    state.setPatients(state.patients.filter((p) => p.id !== id))
+    state.setPatients(state.patients.filter((p: Patient) => p.id !== id))
   },
 
   async reset(): Promise<Patient[]> {

@@ -1,5 +1,5 @@
-import { useCreatePatient, useDeletePatient, useUpdatePatient } from '@/hooks'
-import { usePatientsStore } from '@/stores/patientsStore'
+import { useAppStore } from '@/stores/appStore'
+import { useCreatePatient, useDeletePatient, useUpdatePatient } from '@/hooks/usePatients'
 import type { PatientDraft } from '@/types'
 import { useForm } from 'react-hook-form'
 import { validation } from './validation'
@@ -11,15 +11,13 @@ const DEFAULT_PATIENT: PatientDraft = {
 } as const
 
 export default function PatientForm() {
-  const { editingPatientId, closeForm } = usePatientsStore()
+  const closeForm = useAppStore((state) => state.closeForm)
+  const editingId = useAppStore((state) => state.editingId)
   const createPatient = useCreatePatient()
   const updatePatient = useUpdatePatient()
   const deletePatient = useDeletePatient()
 
-  // Get the current patient being edited from the store
-  const editingPatient = usePatientsStore((state) =>
-    editingPatientId ? state.patients.find((p) => p.id === editingPatientId) : undefined,
-  )
+  const editingPatient = useAppStore((state) => state.patients.find((p) => p.id === editingId))
 
   const {
     register,
@@ -29,15 +27,15 @@ export default function PatientForm() {
     defaultValues: editingPatient || DEFAULT_PATIENT,
   })
 
-  const onSubmit = (data: PatientDraft) => {
+  const onSubmitForm = (data: PatientDraft) => {
     const formattedData = {
       ...data,
       age: Number(data.age),
     }
 
-    if (editingPatientId) {
+    if (editingId) {
       updatePatient.mutate({
-        id: editingPatientId,
+        id: editingId,
         patient: formattedData,
       })
     } else {
@@ -47,18 +45,16 @@ export default function PatientForm() {
   }
 
   const handleDelete = () => {
-    if (!editingPatientId) return
-    deletePatient.mutate(editingPatientId)
+    if (!editingId) return
+    deletePatient.mutate(editingId)
     closeForm()
   }
 
   return (
     <div className="mb-8 rounded-lg bg-white p-6 shadow-sm">
-      <h2 className="mb-4 text-xl font-bold">
-        {editingPatientId ? 'Edit Patient' : 'Add New Patient'}
-      </h2>
+      <h2 className="mb-4 text-xl font-bold">{editingId ? 'Edit Patient' : 'Add New Patient'}</h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
             Name
@@ -92,7 +88,7 @@ export default function PatientForm() {
 
         <div className="flex justify-between">
           <div>
-            {editingPatientId && (
+            {editingId && (
               <button type="button" onClick={handleDelete} className="button danger">
                 Delete
               </button>

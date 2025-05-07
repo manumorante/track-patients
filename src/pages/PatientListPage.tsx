@@ -1,9 +1,9 @@
 import { PatientCard, PatientFormDialog, PatientsSearch } from '@/components/patients'
 import { useSearchPatients } from '@/hooks/useSearchPatients'
-import { usePatientsStore } from '@/stores/patientsStore'
+import { useAppStore } from '@/stores/appStore'
 
 export default function PatientListPage() {
-  const { openForm, searchQuery } = usePatientsStore()
+  const { openForm, searchQuery } = useAppStore()
   const { results: patients, isLoading } = useSearchPatients(searchQuery)
 
   return (

@@ -1,13 +1,13 @@
+import { useAppStore } from '@/stores/appStore'
 import type { Patient } from '@/types'
 import { Link } from 'react-router-dom'
-import { usePatientsStore } from '@/stores/patientsStore'
 
 interface Props {
   patient: Patient
 }
 
 export default function PatientCard({ patient }: Props) {
-  const { openForm } = usePatientsStore()
+  const { openForm } = useAppStore()
 
   return (
     <div className="flex items-center justify-between rounded-lg border border-zinc-200 bg-white p-4">
