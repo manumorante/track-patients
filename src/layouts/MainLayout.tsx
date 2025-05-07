@@ -3,11 +3,13 @@ import { Outlet } from 'react-router-dom'
 
 export default function MainLayout() {
   return (
-    <div className="container mx-auto max-w-3xl p-6">
-      <Navigation />
-      <main className="mt-8">
-        <Outlet />
-      </main>
-    </div>
+    <>
+      <div className="flex">
+        <Navigation />
+        <div className="container mx-auto max-w-5xl p-6">
+          <Outlet />
+        </div>
+      </div>
+    </>
   )
 }

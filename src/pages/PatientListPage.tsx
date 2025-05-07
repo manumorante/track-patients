@@ -10,7 +10,7 @@ export default function PatientListPage() {
 
   return (
     <>
-      <h1 className="mb-4 text-3xl">Patients</h1>
+      <h1 className="mb-4 text-xl">Patients</h1>
 
       <div className="mb-8 flex items-center gap-3">
         <div className="flex-1">
