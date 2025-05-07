@@ -19,12 +19,12 @@
   }
 
   .button {
-    @apply inline-flex touch-none items-center justify-center gap-2 rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow-xs transition-transform outline-none select-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 md:px-3 md:py-1.5;
+    @apply inline-flex cursor-pointer touch-none items-center justify-center gap-2 rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow-xs transition-transform outline-none select-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 md:px-3 md:py-1.5;
     -webkit-tap-highlight-color: transparent;
   }
 
   .button.secondary {
-    @apply bg-zinc-100 text-zinc-900 hover:bg-zinc-100/90;
+    @apply border bg-zinc-50 font-medium text-zinc-700 hover:border-zinc-300 hover:bg-white hover:text-zinc-800;
   }
 
   .button.danger {
