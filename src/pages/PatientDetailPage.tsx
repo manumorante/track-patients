@@ -45,8 +45,8 @@ export default function PatientDetailPage() {
           </p>
         </Card>
 
-        <div className="w-96">
-          <h2 className="mb-4 text-lg font-medium">Notes</h2>
+        <div className="w-96 rounded-lg border border-zinc-300 bg-zinc-200/60 p-6">
+          <h2 className="mb-4 text-lg font-medium text-zinc-600">Notes</h2>
 
           <NotesList patientId={id} />
         </div>
