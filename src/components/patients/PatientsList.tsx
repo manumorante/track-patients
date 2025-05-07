@@ -7,6 +7,7 @@ import Card from '../common/Card'
 
 export default function PatientsList() {
   const searchQuery = usePatientsStore((state) => state.searchQuery)
+  const editForm = usePatientsStore((state) => state.editForm)
   const { results: patients, isLoading } = useSearchPatients(searchQuery)
   const hasResults = useMemo(() => patients?.length !== 0, [patients])
 
@@ -27,17 +28,25 @@ export default function PatientsList() {
                 <th className={css.th}>Name</th>
                 <th className={css.th}>Age</th>
                 <th className={css.th}>Primary Condition</th>
+                <th className={css.th}>Actions</th>
               </tr>
             </thead>
 
             <tbody>
               {patients?.map((patient) => (
-                <tr className="border-b border-zinc-200 bg-white p-4 hover:bg-zinc-50">
+                <tr
+                  key={patient.id}
+                  className="border-b border-zinc-200 bg-white p-4 hover:bg-zinc-50">
                   <td className={cx(css.td, 'font-medium')}>
                     <Link to={`/patients/${patient.id}`}>{patient.name}</Link>
                   </td>
                   <td className={css.td}>{patient.age} years</td>
                   <td className={css.td}>{patient.primaryCondition}</td>
+                  <td className={css.td}>
+                    <button className="button secondary" onClick={() => editForm(patient.id)}>
+                      Edit
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

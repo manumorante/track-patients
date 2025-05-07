@@ -8,17 +8,19 @@ export default function PatientListPage() {
 
   return (
     <>
-      <div className="mb-8 flex items-center gap-3">
-        <div className="flex-1">
-          <PatientsSearch />
+      <div className="space-y-8">
+        <div className="flex items-center gap-3">
+          <div className="flex-1">
+            <PatientsSearch />
+          </div>
+          <button className="button" onClick={() => addForm()} disabled={isFormOpen}>
+            Add Patient
+          </button>
         </div>
-        <button className="button" onClick={() => addForm()} disabled={isFormOpen}>
-          Add Patient
-        </button>
-      </div>
 
-      <PatientFormDialog />
-      <PatientsList />
+        <PatientFormDialog />
+        <PatientsList />
+      </div>
     </>
   )
 }
