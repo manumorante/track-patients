@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
-export function Navigation() {
+export default function Navigation() {
   return (
     <div className="mb-8 space-y-4">
       <nav className="flex gap-6 text-sm text-gray-500">

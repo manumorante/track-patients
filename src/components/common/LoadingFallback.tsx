@@ -1,4 +1,4 @@
-export function LoadingFallback() {
+export default function LoadingFallback() {
   return (
     <div className="bg-background/30 fixed inset-0 flex items-center justify-center backdrop-blur-sm">
       <div className="relative h-8 w-8">

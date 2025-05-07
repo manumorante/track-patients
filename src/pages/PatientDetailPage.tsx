@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { usePatient } from '@/hooks/usePatients'
-import { PatientNotes } from '@/components/PatientNotes'
+import { PatientNotes } from '@/components/notes/PatientNotes'
 
 export default function PatientDetailPage() {
   const { id } = useParams()
