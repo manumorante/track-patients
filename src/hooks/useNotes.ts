@@ -1,19 +1,12 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/api/notes'
 import type { Note } from '@/types'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 // Queries
-export function useNotes() {
+export function useNotes(patientId?: string) {
   return useQuery({
-    queryKey: ['notes'],
-    queryFn: api.getAll,
-  })
-}
-
-export function usePatientNotes(patientId: string) {
-  return useQuery({
-    queryKey: ['notes', 'patient', patientId],
-    queryFn: () => api.getByPatientId(patientId),
+    queryKey: ['notes', patientId],
+    queryFn: () => (patientId ? api.getByPatientId(patientId) : api.getAll()),
   })
 }
 
