@@ -1,4 +1,4 @@
-import { PatientFormDialog, PatientsSearch } from '@/components/patients'
+import { PatientEditorDialog, PatientsSearch } from '@/components/patients'
 import PatientsTable from '@/components/patients/PatientsTable'
 import { usePatientsStore } from '@/stores/patientsStore'
 
@@ -20,7 +20,7 @@ export default function PatientListPage() {
           </button>
         </div>
 
-        <PatientFormDialog />
+        <PatientEditorDialog />
         <PatientsTable />
       </div>
     </>

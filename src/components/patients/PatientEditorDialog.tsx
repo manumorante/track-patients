@@ -1,10 +1,10 @@
 import { usePatientsStore } from '@/stores/patientsStore'
-import PatientForm from './PatientForm'
+import PatientEditor from './PatientEditor'
 
-export default function PatientFormDialog() {
+export default function PatientEditorDialog() {
   const isFormOpen = usePatientsStore((state) => state.isFormOpen)
 
   if (!isFormOpen) return null
 
-  return <PatientForm />
+  return <PatientEditor />
 }

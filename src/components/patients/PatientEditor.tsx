@@ -12,7 +12,7 @@ const DEFAULT_PATIENT: PatientDraft = {
   createdAt: new Date().toISOString(),
 } as const
 
-export default function PatientForm() {
+export default function PatientEditor() {
   const closeForm = usePatientsStore((state) => state.closeForm)
   const editingId = usePatientsStore((state) => state.editingId)
   const createPatient = useCreatePatient()
