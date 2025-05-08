@@ -1,7 +1,7 @@
 import { LoadingFallback } from '@/components/common'
-import { MainLayout } from '@/layouts'
 import { lazy, Suspense } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Layout from './Layout'
 
 // Lazy load pages
 const HomePage = lazy(() => import('@/pages/HomePage'))
@@ -11,7 +11,7 @@ const LatestNotesPage = lazy(() => import('@/pages/LatestNotesPage'))
 
 const router = createBrowserRouter([
   {
-    element: <MainLayout />,
+    element: <Layout />,
     children: [
       {
         index: true,

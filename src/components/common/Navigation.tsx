@@ -11,7 +11,7 @@ const navItems = [
 
 const getNavLinkClass = (isActive: boolean) =>
   cx(
-    'flex items-center gap-2 text-sm rounded-md px-2 py-1 transition-colors',
+    'flex items-center gap-2 text-xs sm:text-sm rounded-md px-2 py-1 transition-colors',
     isActive ? 'text-black bg-zinc-100' : 'text-gray-500 hover:bg-zinc-100',
   )
 
@@ -26,8 +26,8 @@ export default function Navigation() {
           'fixed inset-y-0 left-0 z-40 w-52 transform bg-white transition-transform duration-200 ease-in-out sm:relative sm:translate-x-0',
           isNavOpen ? 'translate-x-0' : '-translate-x-full',
         )}>
-        <div className="space-y-4 p-8">
-          <NavLink to="/" className="flex flex-col text-lg leading-5 font-semibold">
+        <div className="space-y-4 p-4 sm:p-8">
+          <NavLink to="/" className="flex flex-col text-base leading-5 font-semibold sm:text-lg">
             <span className="font-light">Track</span>
             <span className="font-black">Patients</span>
           </NavLink>
@@ -39,7 +39,7 @@ export default function Navigation() {
                 to={to}
                 className={({ isActive }) => getNavLinkClass(isActive)}
                 onClick={closeNav}>
-                <Icon className="h-4 w-4" />
+                <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 {label}
               </NavLink>
             ))}
