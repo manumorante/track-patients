@@ -16,7 +16,7 @@ export default function PatientListPage() {
           <div className="flex-1">
             <PatientsSearch />
           </div>
-          <button className="button" onClick={() => addForm()} disabled={isFormOpen}>
+          <button className="button" onClick={addForm} disabled={isFormOpen}>
             Add Patient
           </button>
         </div>
