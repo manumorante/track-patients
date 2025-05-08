@@ -1,13 +1,11 @@
 # Frontend Challenge
 
-## Scenario
-
-Here, coaches help patients manage chronic conditions through regular check-ins. Your
-task: build a simple dashboard for tracking patients and coaching notes.
-
 ## Stack
 
-- React + TypeScript
+- React
+- TypeScript
+- Vite
+- React Router
 - React Query
 - Zustand
 - Tailwind CSS
@@ -34,24 +32,30 @@ task: build a simple dashboard for tracking patients and coaching notes.
 
 - **Shancn Free**: I wouldn't use a library like Shancn/UI directly in a company because it requires a lot of oversight and changes. It also doesn't scale. It's preferable to create and maintain your own design system, ensuring that it's reflected in your components, with a well-controlled approach.
 
+- **Tailwind CSS**: The beloved and hated _Tailwind_... I ignored it for a long time until I discovered that it lets me do everything I want. It's not a _Bootstrap_! In this _Challenge_ I've used it in a variety of ways. It's very convenient and above all offers the lightweight utility classes. It is important to use the _Prettier_ plugin so that the entire team uses the same class order for readability.
+
 - **Headless UI** offers me just enough to be able to put the company's styles on top, it is lightweight and scalable.
 
 - **UI Approach**: It's important to know that I've tried to make this _challenge_ as similar to how I would work in a company: controlled, scalable, and uniform. I'm thinking of working with a design team where we would meet to model a _Storybook_, for example.
 
 - **Feature-based components** When thinking about a medium-to-large project, it's important to keep in mind that our features should be well organized. In this case, I've made the only available separation `patients` and `notes`, highlighting the potential use of both in other areas of the app.
 
+- **Prettier**: I've configured Prettier to my favorite style :) I believe that all projects (within each team) should agree on and use both a code formatting tool and a linter so that everyone is unified and satisfied.
+
 ## Notes
 
 - **Auto Barrel Files**: I usually work with an extension that creates and maintains `index.ts` files with all exports. It's very convenient for development and allows for cleaner components.
-
-## Future Improvements
-
-- 404 page and error boundaries were omitted for simplicity but would be added in a real app.
 
 ## Testing Approach
 
 ### What testing strategy would you implement to prevent regressions?
 
+Test each component/hook (unit) separately. Test functionalities, for example, **it is NOT possible to edit a patient with a frozen status** (integration). Tests are very helpful in product decisions.
+
 ### Which components or features would you prioritize for testing and why?
 
+I would prioritize the components or hooks that interact with the API. In this case, those that use the **React Query** hooks. Then those who work with the **global state** and finally the **dumb components**.
+
 ### What testing tools or libraries would you use with this stack?
+
+**Jest and React Testing Library** for components. **jest.mock** for simulating APIs. And I would consider **Cypress** for lightweight end-to-end tests to ensure user flows work in a realistic environment. I like Cypress and it has saved us from several...
