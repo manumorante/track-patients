@@ -1,5 +1,6 @@
 export { default as ActionMenu } from './ActionMenu'
 export { default as Card } from './Card'
-export { default as LoadingFallback } from './LoadingFallback'
+export * as Error from './Error'
+export { default as Loading } from './Loading'
 export { default as Navigation } from './Navigation'
-export { Error } from './Error'
+export { default as PageHeader } from './PageHeader'

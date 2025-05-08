@@ -1,4 +1,4 @@
-import { LoadingFallback } from '@/components/common'
+import { Loading } from '@/components/common'
 import { lazy, Suspense } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './Layout'
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
 
 export default function AppRouter() {
   return (
-    <Suspense fallback={<LoadingFallback />}>
+    <Suspense fallback={<Loading />}>
       <RouterProvider router={router} />
     </Suspense>
   )

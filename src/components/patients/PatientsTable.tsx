@@ -21,7 +21,6 @@ export default function PatientsTable() {
 
   return (
     <div>
-      {isLoading && <div className="text-gray-500">Searching...</div>}
       {!hasResults && <div className="text-gray-500">No results found.</div>}
       {hasResults && !isLoading && (
         <Card className="w-full overflow-hidden">

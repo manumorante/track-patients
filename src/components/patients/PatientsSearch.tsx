@@ -11,7 +11,7 @@ export default function PatientsSearch({ value, onChange, isLoading }: Props) {
   return (
     <div className="flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-3">
       {isLoading ? (
-        <ArrowPathIcon className="h-5 w-5 animate-spin text-zinc-500" />
+        <ArrowPathIcon className="h-5 w-5 animate-spin text-zinc-400" />
       ) : (
         <MagnifyingGlassIcon className="h-5 w-5 text-zinc-500" />
       )}
