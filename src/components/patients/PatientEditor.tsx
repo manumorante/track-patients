@@ -51,7 +51,13 @@ export default function PatientEditor() {
           <label htmlFor="name" className="label">
             Name
           </label>
-          <input id="name" type="text" className="input" {...register('name', validation.name)} />
+          <input
+            id="name"
+            type="text"
+            className="input"
+            autoFocus
+            {...register('name', validation.name)}
+          />
           {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
         </div>
 
