@@ -10,7 +10,12 @@ export function useNotes(patientId?: string) {
   })
 }
 
-
+export function useLatestNotes() {
+  return useQuery({
+    queryKey: ['notes', 'latest'],
+    queryFn: () => api.getAll(),
+  })
+}
 
 // Mutations
 export function useCreateNote() {

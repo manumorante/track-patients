@@ -1,7 +1,7 @@
 export default function HomePage() {
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold">Home</h1>
+      <h1 className="pageTitle mb-4">Home</h1>
     </div>
   )
 }

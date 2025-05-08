@@ -10,6 +10,12 @@
 }
 
 @layer components {
+  /* Typography */
+  .pageTitle {
+    @apply text-xl font-light ;
+  }
+
+  /* Form Elements */
   .input,
   .textarea {
     @apply w-full px-3 py-1 rounded-md
@@ -23,6 +29,7 @@
     @apply block text-sm font-normal text-zinc-500 my-1 ml-0.5;
   }
 
+  /* Buttons */
   .button,
   .input {
     @apply h-10;

@@ -8,6 +8,8 @@ export default function PatientListPage() {
 
   return (
     <>
+      <h1 className="pageTitle mb-4">Patients</h1>
+
       <div className="space-y-8">
         <div className="flex items-center gap-3">
           <div className="flex-1">

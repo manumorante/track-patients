@@ -10,6 +10,7 @@ export default function PatientDetailPage() {
 
   return (
     <>
+      <h1 className="pageTitle mb-4">Patient details</h1>
       <button onClick={() => navigate(-1)} className="button secondary mb-8">
         <ArrowLeftIcon className="h-5 w-5" />
         Back
