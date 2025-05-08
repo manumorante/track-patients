@@ -1,14 +1,15 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline'
+import type { ComponentType } from 'react'
 
-export type Action = {
+type Action = {
   label: string
-  icon?: React.ComponentType<{ className?: string }>
+  icon?: ComponentType<{ className?: string }>
   onClick: () => void
   className?: string
 }
 
-interface Props {
+type Props = {
   actions: Action[]
   className?: string
 }
