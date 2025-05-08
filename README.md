@@ -15,10 +15,11 @@ task: build a simple dashboard for tracking patients and coaching notes.
 
 ## Key Decisions
 
-- Simple API simulation with consistent delays
-- **Hooks organized**: Each data operation has its own hook for better reusability. 
+- **API Mock**: I assume the API part is less relevant to this challenge. I spent more time on it than I would have liked, but I'm happy with it. It's simple and functional.
 
-- **Global state**: con Zustand, para gestionar y persistir todos los estados del UI.
+- **Organized Hooks**: Each data operation has its own hook for better reusability and better lifecycle control. By personal choice or habit, I've tried not to use any `useEffects`.
+
+- **Global state**: Zustand to manage and persist all UI states.
 
 - **Local Database**: I take advantage of Zustand and its function of persisting in localStorage to save data so I can edit, create and simulate a database.
 
