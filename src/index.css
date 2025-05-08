@@ -10,11 +10,6 @@
 }
 
 @layer components {
-  /* Typography */
-  .pageTitle {
-    @apply text-xl font-light ;
-  }
-
   /* Form Elements */
   .input,
   .textarea {

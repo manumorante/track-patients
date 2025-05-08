@@ -1,3 +1,4 @@
+import PageHeader from '@/components/common/PageHeader'
 import { NotesList } from '@/components/notes'
 import PatientProfile from '@/components/patients/PatientProfile'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
@@ -10,7 +11,8 @@ export default function PatientDetailPage() {
 
   return (
     <>
-      <h1 className="pageTitle mb-4">Patient details</h1>
+      <PageHeader title="Patient details" />
+
       <button onClick={() => navigate(-1)} className="button secondary mb-8">
         <ArrowLeftIcon className="h-5 w-5" />
         Back
