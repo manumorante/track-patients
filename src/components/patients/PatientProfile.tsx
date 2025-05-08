@@ -1,6 +1,6 @@
-import type { Patient } from '@/types'
-import Card from '../common/Card'
+import { Card, Error } from '@/components/common'
 import { usePatient } from '@/hooks'
+import type { Patient } from '@/types'
 
 type Props = {
   id: Patient['id']
@@ -9,33 +9,25 @@ type Props = {
 export default function PatientProfile({ id }: Props) {
   const { data: patient, isLoading } = usePatient(id ?? '')
 
-  if (isLoading) {
-    return <Skeleton />
-  }
+  if (isLoading) return <Skeleton />
 
   if (!id || !patient) {
-    return (
-      <div className="flex h-[50vh] items-center justify-center">
-        <p className="text-lg text-zinc-600">Paciente no encontrado</p>
-      </div>
-    )
+    return <Error message="Patient not found" />
   }
 
   return (
-    <div>
-      <Card className="Profile w-full min-w-80 flex-1 space-y-4 p-6 md:w-auto md:p-8">
-        <h1 className="text-2xl">{patient.name}</h1>
-        <p className="">
-          <span className="text-sm text-gray-400 uppercase">Age</span>{' '}
-          <div className="text-lg text-gray-600">{patient.age} year old</div>
-        </p>
+    <Card className="Profile w-full min-w-80 flex-1 space-y-4 p-6 md:w-auto md:p-8">
+      <h1 className="text-2xl">{patient.name}</h1>
+      <p className="">
+        <span className="text-sm text-gray-400 uppercase">Age</span>{' '}
+        <div className="text-lg text-gray-600">{patient.age} year old</div>
+      </p>
 
-        <p className="text-gray-400">
-          <span className="text-sm text-gray-400 uppercase">Primary Condition</span>{' '}
-          <div className="text-lg text-gray-600">{patient.primaryCondition}</div>
-        </p>
-      </Card>
-    </div>
+      <p className="text-gray-400">
+        <span className="text-sm text-gray-400 uppercase">Primary Condition</span>{' '}
+        <div className="text-lg text-gray-600">{patient.primaryCondition}</div>
+      </p>
+    </Card>
   )
 }
 
