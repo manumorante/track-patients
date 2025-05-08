@@ -13,24 +13,29 @@ export const api = {
     )
   },
 
+  _isValidSearchQuery(query: string): boolean {
+    return query?.trim().length >= 2
+  },
+
+  _filterPatients(patients: Patient[], search: string): Patient[] {
+    return patients.filter(
+      (p: Patient) =>
+        p.name.toLowerCase().includes(search) || p.primaryCondition.toLowerCase().includes(search),
+    )
+  },
+
   async search(query: string, page: number = 1): Promise<Patient[]> {
     await delay()
     const patients = store.getState().patients
 
-    let filteredPatients = patients
-    if (query?.trim() && query.length >= 2) {
-      const search = query.toLowerCase().trim()
-      filteredPatients = patients.filter(
-        (p: Patient) =>
-          p.name.toLowerCase().includes(search) ||
-          p.primaryCondition.toLowerCase().includes(search),
-      )
+    if (!this._isValidSearchQuery(query)) {
+      return this._sortPatients(patients).slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
     }
 
+    const search = query.toLowerCase().trim()
+    const filteredPatients = this._filterPatients(patients, search)
     const sortedPatients = this._sortPatients(filteredPatients)
-    const startIndex = (page - 1) * PAGE_SIZE
-    const endIndex = startIndex + PAGE_SIZE
-    return sortedPatients.slice(startIndex, endIndex)
+    return sortedPatients.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
   },
 
   async getOne(id: string): Promise<Patient> {

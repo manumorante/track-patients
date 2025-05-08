@@ -81,14 +81,12 @@ export default function PatientsTable() {
           </Card>
 
           {hasNextPage && (
-            <div className="mt-4 flex justify-center">
-              <button
-                onClick={() => fetchNextPage()}
-                disabled={isFetchingNextPage}
-                className="button secondary w-full">
-                {isFetchingNextPage ? 'Loading...' : 'Load More'}
-              </button>
-            </div>
+            <button
+              onClick={() => fetchNextPage()}
+              disabled={isFetchingNextPage}
+              className="button secondary mt-4 w-full">
+              {isFetchingNextPage ? 'Loading...' : 'Load More'}
+            </button>
           )}
         </>
       )}
