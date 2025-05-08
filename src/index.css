@@ -27,7 +27,7 @@
   /* Buttons */
   .button,
   .input {
-    @apply h-10;
+    @apply h-9;
   }
 
   .button {
@@ -50,7 +50,7 @@
   }
 
   .button.danger {
-    @apply bg-red-50 text-red-500
-    hover:bg-red-400 hover:text-white;
+    @apply bg-rose-700 text-white
+    hover:bg-rose-800 ;
   }
 }

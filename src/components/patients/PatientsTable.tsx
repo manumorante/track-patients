@@ -1,11 +1,13 @@
 import { useDeletePatient, useSearchPatients } from '@/hooks'
 import { formatDate } from '@/lib/utils'
 import { usePatientsStore } from '@/stores/patientsStore'
+import { uiStore } from '@/stores/uiStore'
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline'
 import cx from 'clsx'
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { ActionMenu, NoResultsFound } from '../common'
+import AlertDialog from '../common/AlertDialog'
 import Card from '../common/Card'
 
 export default function PatientsTable() {
@@ -13,6 +15,7 @@ export default function PatientsTable() {
   const editForm = usePatientsStore((state) => state.editForm)
   const { results: patients, isLoading } = useSearchPatients(searchQuery)
   const deletePatient = useDeletePatient()
+  const openAlertDialog = uiStore((state) => state.openAlertDialog)
 
   const hasResults = useMemo(() => patients?.length !== 0, [patients])
 
@@ -22,13 +25,16 @@ export default function PatientsTable() {
   }
 
   const handleDeletePatient = (patientId: string) => {
-    if (window.confirm('Are you sure you want to delete this patient?')) {
-      deletePatient.mutate(patientId)
-    }
+    openAlertDialog({
+      title: 'Delete Patient',
+      description: 'Are you sure you want to delete this patient? This action cannot be undone.',
+      onConfirm: () => deletePatient.mutate(patientId),
+    })
   }
 
   return (
     <div>
+      <AlertDialog />
       {!hasResults && searchQuery && (
         <NoResultsFound title={`Your search for "${searchQuery}" did not return any results`} />
       )}
