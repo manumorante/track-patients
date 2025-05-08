@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import type { Note } from '@/types'
 import Card from '@/components/common/Card'
 import { useForm } from 'react-hook-form'
@@ -23,7 +22,6 @@ export default function NoteEditor({ note, onSave, onCancel }: Props) {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isSubmitting },
   } = useForm<NoteFormData>({
     defaultValues: {
@@ -31,17 +29,13 @@ export default function NoteEditor({ note, onSave, onCancel }: Props) {
     },
   })
 
-  useEffect(() => {
-    reset({ text: note.text })
-  }, [note.text, reset])
-
   const onSubmit = (data: NoteFormData) => {
     onSave(data.text)
   }
 
   return (
     <Card className="p-4">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form key={note.id} onSubmit={handleSubmit(onSubmit)}>
         <div className="flex items-start justify-between">
           <textarea
             {...register('text', validation.text)}
