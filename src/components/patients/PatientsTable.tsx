@@ -1,35 +1,21 @@
-import { useDeletePatient, useSearchPatients } from '@/hooks'
+import { AlertDialog, Card, NoResultsFound } from '@/components/common'
+import { PatientActions } from '@/components/patients'
+import { useSearchPatients } from '@/hooks'
 import { formatDate } from '@/lib/utils'
 import { usePatientsStore } from '@/stores/patientsStore'
-import { uiStore } from '@/stores/uiStore'
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline'
 import cx from 'clsx'
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { ActionMenu, NoResultsFound } from '../common'
-import AlertDialog from '../common/AlertDialog'
-import Card from '../common/Card'
 
 export default function PatientsTable() {
   const searchQuery = usePatientsStore((state) => state.searchQuery)
-  const editForm = usePatientsStore((state) => state.editForm)
   const { results: patients, isLoading } = useSearchPatients(searchQuery)
-  const deletePatient = useDeletePatient()
-  const openAlertDialog = uiStore((state) => state.openAlertDialog)
 
   const hasResults = useMemo(() => patients?.length !== 0, [patients])
 
   const css = {
     th: 'px-4 py-3 text-left text-xs font-light text-zinc-500 uppercase',
     td: 'px-4 py-3 text-sm',
-  }
-
-  const handleDeletePatient = (patientId: string) => {
-    openAlertDialog({
-      title: 'Delete Patient',
-      description: 'Are you sure you want to delete this patient? This action cannot be undone.',
-      onConfirm: () => deletePatient.mutate(patientId),
-    })
   }
 
   return (
@@ -76,20 +62,7 @@ export default function PatientsTable() {
                     {formatDate(patient.updatedAt)}
                   </td>
                   <td className={cx(css.td, 'w-20 text-right')}>
-                    <ActionMenu
-                      actions={[
-                        {
-                          label: 'Edit patient',
-                          icon: PencilIcon,
-                          onClick: () => editForm(patient.id),
-                        },
-                        {
-                          label: 'Delete patient',
-                          icon: TrashIcon,
-                          onClick: () => handleDeletePatient(patient.id),
-                        },
-                      ]}
-                    />
+                    <PatientActions patientId={patient.id} />
                   </td>
                 </tr>
               ))}
