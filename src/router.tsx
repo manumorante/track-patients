@@ -1,5 +1,5 @@
 import { LoadingFallback } from '@/components/common'
-import { MainLayout, PatientsLayout } from '@/layouts'
+import { MainLayout } from '@/layouts'
 import { lazy, Suspense } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
@@ -19,17 +19,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'patients',
-        element: <PatientsLayout />,
-        children: [
-          {
-            index: true,
-            element: <PatientListPage />,
-          },
-          {
-            path: ':id',
-            element: <PatientDetailPage />,
-          },
-        ],
+        element: <PatientListPage />,
+      },
+      {
+        path: 'patients/:id',
+        element: <PatientDetailPage />,
       },
       {
         path: 'notes',
