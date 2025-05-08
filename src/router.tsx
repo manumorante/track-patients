@@ -3,11 +3,9 @@ import { lazy, Suspense } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './Layout'
 
-// Lazy load pages
 const HomePage = lazy(() => import('@/pages/HomePage'))
 const PatientListPage = lazy(() => import('@/pages/PatientListPage'))
 const PatientDetailPage = lazy(() => import('@/pages/PatientDetailPage'))
-const LatestNotesPage = lazy(() => import('@/pages/LatestNotesPage'))
 
 const router = createBrowserRouter([
   {
@@ -24,10 +22,6 @@ const router = createBrowserRouter([
       {
         path: 'patients/:id',
         element: <PatientDetailPage />,
-      },
-      {
-        path: 'latest-notes',
-        element: <LatestNotesPage />,
       },
     ],
   },
