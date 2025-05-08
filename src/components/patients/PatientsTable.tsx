@@ -1,4 +1,4 @@
-import { AlertDialog, Card, NoResultsFound } from '@/components/common'
+import { Card, NoResultsFound } from '@/components/common'
 import { PatientActions } from '@/components/patients'
 import { useSearchPatients } from '@/hooks'
 import { formatDate } from '@/lib/utils'
@@ -20,7 +20,6 @@ export default function PatientsTable() {
 
   return (
     <div>
-      <AlertDialog />
       {!hasResults && searchQuery && (
         <NoResultsFound title={`Your search for "${searchQuery}" did not return any results`} />
       )}

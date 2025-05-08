@@ -1,4 +1,4 @@
-import { Navigation } from '@/components/common'
+import { AlertDialog, Navigation } from '@/components/common'
 import { Outlet } from 'react-router-dom'
 
 export default function Layout() {
@@ -8,6 +8,7 @@ export default function Layout() {
       <div className="container mx-auto max-w-5xl p-4 sm:p-6">
         <Outlet />
       </div>
+      <AlertDialog />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { ActionMenu } from '@/components/common'
 import { useDeleteNote } from '@/hooks'
+import { uiStore } from '@/stores/uiStore'
 import type { Note } from '@/types'
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline'
 
@@ -10,11 +11,14 @@ type NoteActionsProps = {
 
 export default function NoteActions({ note, onEdit }: NoteActionsProps) {
   const deleteNote = useDeleteNote()
+  const openAlertDialog = uiStore((state) => state.openAlertDialog)
 
   const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this note?')) {
-      await deleteNote.mutateAsync(note.id)
-    }
+    openAlertDialog({
+      title: 'Delete Note',
+      description: 'Are you sure you want to delete this note? This action cannot be undone.',
+      onConfirm: () => deleteNote.mutate(note.id),
+    })
   }
 
   return (
@@ -29,7 +33,6 @@ export default function NoteActions({ note, onEdit }: NoteActionsProps) {
           label: 'Delete note',
           icon: TrashIcon,
           onClick: handleDelete,
-          className: 'text-red-600 hover:text-red-700',
         },
       ]}
     />
