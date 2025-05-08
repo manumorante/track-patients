@@ -32,7 +32,9 @@ task: build a simple dashboard for tracking patients and coaching notes.
   - Applying good practices such as avoiding the 300ms delay.
   - Or preventing zooming when focusing on inputs.
 
-- **Shancn Free**: Yo no usaría una librería como _Shancn/UI_ directamente en una empresa ya que necesita mucha supervisión y cambios. Además, no escala. Es preferible crear y mantener tu propio sistema de diseño y que se refleje en tus componentes, bien controlado.
+- **Shancn Free**: I wouldn't use a library like Shancn/UI directly in a company because it requires a lot of oversight and changes. It also doesn't scale. It's preferable to create and maintain your own design system, ensuring that it's reflected in your components, with a well-controlled approach.
+
+- **Headless UI** offers me just enough to be able to put the company's styles on top, it is lightweight and scalable.
 
 - **UI Approach**: It's important to know that I've tried to make this _challenge_ as similar to how I would work in a company: controlled, scalable, and uniform. I'm thinking of working with a design team where we would meet to model a _Storybook_, for example.
 
