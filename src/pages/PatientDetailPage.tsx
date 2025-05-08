@@ -1,6 +1,6 @@
 import PageHeader from '@/components/common/PageHeader'
 import { NotesList } from '@/components/notes'
-import PatientProfile from '@/components/patients/PatientProfile'
+import { PatientEditorDialog, PatientProfile } from '@/components/patients'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -26,6 +26,8 @@ export default function PatientDetailPage() {
           <NotesList patientId={id} />
         </div>
       </div>
+
+      <PatientEditorDialog />
     </>
   )
 }

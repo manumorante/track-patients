@@ -5,4 +5,3 @@ export { default as PatientEditorDialog } from './PatientEditorDialog'
 export { default as PatientProfile } from './PatientProfile'
 export { default as PatientsSearch } from './PatientsSearch'
 export { default as PatientsTable } from './PatientsTable'
-

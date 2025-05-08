@@ -1,4 +1,5 @@
 import { Card, ErrorMessage } from '@/components/common'
+import { PatientActions } from '@/components/patients'
 import { usePatient } from '@/hooks'
 import type { Patient } from '@/types'
 
@@ -16,8 +17,11 @@ export default function PatientProfile({ id }: Props) {
   }
 
   return (
-    <Card className="Profile w-full min-w-80 flex-1 space-y-4 p-6 md:w-auto md:p-7">
-      <h1 className="text-2xl">{patient.name}</h1>
+    <Card className="Profile w-full min-w-80 flex-1 space-y-4 p-6 md:w-auto">
+      <div className="flex justify-between">
+        <h1 className="text-2xl">{patient.name}</h1>
+        <PatientActions patientId={patient.id} />
+      </div>
       <p className="">
         <span className="text-sm text-gray-400 uppercase">Age</span>{' '}
         <div className="text-lg text-gray-600">{patient.age} year old</div>
@@ -32,7 +36,7 @@ export default function PatientProfile({ id }: Props) {
 }
 
 const Skeleton = () => (
-  <Card className="Profile w-full min-w-80 flex-1 space-y-4 p-6 md:w-auto md:p-8">
+  <Card className="Profile w-full min-w-80 flex-1 space-y-4 p-6 md:w-auto">
     <div className="h-8 w-48 animate-pulse rounded-md bg-zinc-100" />
     <div className="space-y-2">
       <div className="h-4 w-16 animate-pulse rounded-md bg-zinc-100" />

@@ -2,7 +2,6 @@ import { useCreatePatient, useUpdatePatient } from '@/hooks'
 import { usePatientsStore } from '@/stores/patientsStore'
 import type { PatientDraft } from '@/types'
 import { useForm } from 'react-hook-form'
-import Card from '@/components/common/Card'
 import { validation } from './validation'
 
 const DEFAULT_PATIENT: PatientDraft = {
@@ -43,7 +42,7 @@ export default function PatientEditor() {
   }
 
   return (
-    <Card className="p-6">
+    <>
       <h2 className="mb-4 text-xl font-bold">{editingId ? 'Edit Patient' : 'Add New Patient'}</h2>
 
       <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">
@@ -96,6 +95,6 @@ export default function PatientEditor() {
           </div>
         </div>
       </form>
-    </Card>
+    </>
   )
 }
