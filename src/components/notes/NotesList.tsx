@@ -5,6 +5,7 @@ import type { Note } from '@/types'
 import { useUpdateNote } from '@/hooks/useNotes'
 import NoteEditor from './NoteEditor'
 import { PlusIcon } from '@heroicons/react/24/outline'
+import { NoResultsFound } from '../common'
 
 export default function NotesList({ patientId }: { patientId: string }) {
   const { data: notes, isLoading, error } = useNotes(patientId)
@@ -50,7 +51,7 @@ export default function NotesList({ patientId }: { patientId: string }) {
   }
 
   return (
-    <div className="sm:auto w-full space-y-4">
+    <div className="space-y-4">
       <div className="flex w-full justify-between">
         <h2 className="text-xl font-medium text-zinc-600">Notes</h2>
 
@@ -82,7 +83,7 @@ export default function NotesList({ patientId }: { patientId: string }) {
       )}
 
       {!notes?.length && !isCreating && (
-        <p className="p-9 text-center text-gray-600">No notes available for this patient.</p>
+        <NoResultsFound title="No notes available for this patient" />
       )}
     </div>
   )

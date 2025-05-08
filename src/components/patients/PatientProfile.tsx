@@ -1,4 +1,4 @@
-import { Card, Error } from '@/components/common'
+import { Card, ErrorMessage } from '@/components/common'
 import { usePatient } from '@/hooks'
 import type { Patient } from '@/types'
 
@@ -12,11 +12,11 @@ export default function PatientProfile({ id }: Props) {
   if (isLoading) return <Skeleton />
 
   if (!id || !patient) {
-    return <Error message="Patient not found" />
+    return <ErrorMessage message="Patient not found" />
   }
 
   return (
-    <Card className="Profile w-full min-w-80 flex-1 space-y-4 p-6 md:w-auto md:p-8">
+    <Card className="Profile w-full min-w-80 flex-1 space-y-4 p-6 md:w-auto md:p-7">
       <h1 className="text-2xl">{patient.name}</h1>
       <p className="">
         <span className="text-sm text-gray-400 uppercase">Age</span>{' '}

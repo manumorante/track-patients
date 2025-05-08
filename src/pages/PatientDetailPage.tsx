@@ -19,8 +19,12 @@ export default function PatientDetailPage() {
       </button>
 
       <div className="flex flex-col items-start gap-6 md:flex-row">
-        <PatientProfile id={id} />
-        <NotesList patientId={id} />
+        <div className="w-full md:w-80">
+          <PatientProfile id={id} />
+        </div>
+        <div className="w-full flex-1">
+          <NotesList patientId={id} />
+        </div>
       </div>
     </>
   )

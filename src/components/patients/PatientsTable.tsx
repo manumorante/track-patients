@@ -4,7 +4,7 @@ import cx from 'clsx'
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import Card from '../common/Card'
-import { ActionMenu } from '../common'
+import { ActionMenu, NoResultsFound } from '../common'
 import { PencilIcon } from '@heroicons/react/24/outline'
 import { formatDate } from '@/lib/utils'
 
@@ -21,7 +21,9 @@ export default function PatientsTable() {
 
   return (
     <div>
-      {!hasResults && <div className="text-gray-500">No results found.</div>}
+      {!hasResults && searchQuery && (
+        <NoResultsFound title={`Your search for "${searchQuery}" did not return any results`} />
+      )}
       {hasResults && !isLoading && (
         <Card className="w-full overflow-hidden">
           <table className="w-full table-auto">
