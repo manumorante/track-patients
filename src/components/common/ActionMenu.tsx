@@ -1,5 +1,5 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { EllipsisVerticalIcon } from '@heroicons/react/24/outline'
+import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline'
 
 export type Action = {
   label: string
@@ -18,7 +18,7 @@ export default function ActionMenu({ actions, className = '' }: Props) {
     <Menu as="div" className="relative inline-block text-left">
       <MenuButton
         className={`inline-flex items-center justify-center rounded-lg p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ${className}`}>
-        <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
+        <EllipsisHorizontalIcon className="h-5 w-5" aria-hidden="true" />
       </MenuButton>
 
       <MenuItems

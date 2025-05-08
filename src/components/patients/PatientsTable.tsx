@@ -4,6 +4,8 @@ import cx from 'clsx'
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import Card from '../common/Card'
+import { ActionMenu } from '../common'
+import { PencilIcon } from '@heroicons/react/24/outline'
 
 export default function PatientsTable() {
   const searchQuery = usePatientsStore((state) => state.searchQuery)
@@ -12,8 +14,8 @@ export default function PatientsTable() {
   const hasResults = useMemo(() => patients?.length !== 0, [patients])
 
   const css = {
-    th: 'px-4 py-3 pl-8 text-left text-xs font-light text-zinc-500 uppercase',
-    td: 'px-4 py-3 pl-8 text-sm',
+    th: 'px-6 py-3 text-left text-xs font-light text-zinc-500 uppercase',
+    td: 'px-6 py-3 text-sm',
   }
 
   return (
@@ -28,7 +30,7 @@ export default function PatientsTable() {
                 <th className={css.th}>Name</th>
                 <th className={css.th}>Age</th>
                 <th className={css.th}>Primary Condition</th>
-                <th className={css.th}>Actions</th>
+                <th className={cx(css.th, 'text-right')}>Actions</th>
               </tr>
             </thead>
 
@@ -42,10 +44,16 @@ export default function PatientsTable() {
                   </td>
                   <td className={css.td}>{patient.age} years</td>
                   <td className={css.td}>{patient.primaryCondition}</td>
-                  <td className={cx(css.td, 'w-30')}>
-                    <button className="button secondary" onClick={() => editForm(patient.id)}>
-                      Edit
-                    </button>
+                  <td className={cx(css.td, 'w-30 text-right')}>
+                    <ActionMenu
+                      actions={[
+                        {
+                          label: 'Edit patient',
+                          icon: PencilIcon,
+                          onClick: () => editForm(patient.id),
+                        },
+                      ]}
+                    />
                   </td>
                 </tr>
               ))}
