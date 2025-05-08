@@ -1,5 +1,6 @@
 import { uiStore } from '@/stores/uiStore'
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import Overlayer from './Overlayer'
 
 export default function AlertDialog() {
   const alertDialog = uiStore((state) => state.alertDialog)
@@ -14,7 +15,7 @@ export default function AlertDialog() {
 
   return (
     <Dialog open={true} onClose={closeAlertDialog} className="relative z-50">
-      <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+      <Overlayer />
       <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
         <DialogPanel className="max-w-lg space-y-4 rounded-lg border bg-white p-6 shadow-lg">
           <DialogTitle className="text-lg font-semibold text-gray-900">
