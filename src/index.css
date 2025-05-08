@@ -2,28 +2,49 @@
 
 @layer base {
   * {
-    @apply border-zinc-300 outline-zinc-400/50;
+    @apply border-zinc-200 outline-zinc-400/50;
   }
   body {
-    @apply bg-zinc-100 text-zinc-800;
+    @apply bg-zinc-50 text-zinc-800;
   }
 }
 
 @layer components {
+  .input,
+  .textarea {
+    @apply w-full px-3 py-1 rounded-md
+    border border-zinc-200 hover:border-zinc-300
+    bg-white text-sm  placeholder:text-zinc-400
+    ring-zinc-200
+    focus-visible:ring-2 focus-visible:ring-zinc-200 focus-visible:outline-none focus-visible:border-zinc-300;
+  }
+
+  .button,
   .input {
-    @apply flex h-9 w-full rounded-md border bg-white px-3 py-1 text-sm ring-zinc-500 placeholder:text-zinc-400 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+    @apply h-10;
   }
 
   .button {
-    @apply inline-flex cursor-pointer touch-none items-center justify-center gap-2 rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow-xs transition-transform outline-none select-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 md:px-3 md:py-1.5;
+    @apply inline-flex px-3 py-1.5
+    text-sm font-medium text-white
+    bg-black shadow-xs
+    items-center justify-center gap-2
+    rounded-md
+    transition-colors outline-none select-none
+    focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2
+    disabled:pointer-events-none disabled:opacity-50 
+    cursor-pointer touch-none;
     -webkit-tap-highlight-color: transparent;
   }
 
   .button.secondary {
-    @apply border border-zinc-200 bg-zinc-50 font-medium text-zinc-700 hover:border-zinc-300 hover:bg-white hover:text-zinc-800;
+    @apply border border-zinc-200 bg-zinc-50
+    font-medium text-zinc-700
+    hover:border-zinc-300 hover:bg-white hover:text-zinc-800;
   }
 
   .button.danger {
-    @apply bg-red-50 text-red-500 hover:bg-red-400 hover:text-white;
+    @apply bg-red-50 text-red-500
+    hover:bg-red-400 hover:text-white;
   }
 }
