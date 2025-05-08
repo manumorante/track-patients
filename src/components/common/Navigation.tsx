@@ -6,7 +6,7 @@ import { uiStore } from '@/stores/uiStore'
 const navItems = [
   { to: '/', label: 'Home', icon: HomeIcon },
   { to: '/patients', label: 'Patients', icon: UsersIcon },
-  { to: '/notes', label: 'Last Notes', icon: DocumentTextIcon },
+  { to: '/latest-notes', label: 'Latest Notes', icon: DocumentTextIcon },
 ]
 
 const getNavLinkClass = (isActive: boolean) =>

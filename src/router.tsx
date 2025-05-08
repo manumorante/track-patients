@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         element: <PatientDetailPage />,
       },
       {
-        path: 'notes',
+        path: 'latest-notes',
         element: <LatestNotesPage />,
       },
     ],
