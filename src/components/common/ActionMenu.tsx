@@ -31,7 +31,7 @@ export default function ActionMenu({ actions, className = '' }: Props) {
             <MenuItem key={index}>
               <button
                 onClick={action.onClick}
-                className={`group flex w-full items-center rounded-lg px-3 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 ${action.className}`}>
+                className={`group flex w-full cursor-pointer items-center rounded-lg px-3 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 ${action.className}`}>
                 {action.icon && (
                   <action.icon
                     className="mr-2 h-4 w-4 text-gray-500 group-hover:text-gray-500"

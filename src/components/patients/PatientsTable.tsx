@@ -1,22 +1,30 @@
-import { useSearchPatients } from '@/hooks'
+import { useDeletePatient, useSearchPatients } from '@/hooks'
+import { formatDate } from '@/lib/utils'
 import { usePatientsStore } from '@/stores/patientsStore'
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline'
 import cx from 'clsx'
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import Card from '../common/Card'
 import { ActionMenu, NoResultsFound } from '../common'
-import { PencilIcon } from '@heroicons/react/24/outline'
-import { formatDate } from '@/lib/utils'
+import Card from '../common/Card'
 
 export default function PatientsTable() {
   const searchQuery = usePatientsStore((state) => state.searchQuery)
   const editForm = usePatientsStore((state) => state.editForm)
   const { results: patients, isLoading } = useSearchPatients(searchQuery)
+  const deletePatient = useDeletePatient()
+
   const hasResults = useMemo(() => patients?.length !== 0, [patients])
 
   const css = {
     th: 'px-4 py-3 text-left text-xs font-light text-zinc-500 uppercase',
     td: 'px-4 py-3 text-sm',
+  }
+
+  const handleDeletePatient = (patientId: string) => {
+    if (window.confirm('Are you sure you want to delete this patient?')) {
+      deletePatient.mutate(patientId)
+    }
   }
 
   return (
@@ -68,6 +76,11 @@ export default function PatientsTable() {
                           label: 'Edit patient',
                           icon: PencilIcon,
                           onClick: () => editForm(patient.id),
+                        },
+                        {
+                          label: 'Delete patient',
+                          icon: TrashIcon,
+                          onClick: () => handleDeletePatient(patient.id),
                         },
                       ]}
                     />
