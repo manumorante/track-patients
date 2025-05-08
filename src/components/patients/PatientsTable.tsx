@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import Card from '../common/Card'
 
-export default function PatientsList() {
+export default function PatientsTable() {
   const searchQuery = usePatientsStore((state) => state.searchQuery)
   const editForm = usePatientsStore((state) => state.editForm)
   const { results: patients, isLoading } = useSearchPatients(searchQuery)
@@ -13,7 +13,7 @@ export default function PatientsList() {
 
   const css = {
     th: 'px-4 py-3 pl-8 text-left text-xs font-light text-zinc-500 uppercase',
-    td: 'px-4 py-3 pl-8',
+    td: 'px-4 py-3 pl-8 text-sm',
   }
 
   return (
