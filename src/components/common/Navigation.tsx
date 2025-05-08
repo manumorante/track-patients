@@ -23,7 +23,7 @@ export default function Navigation() {
     <>
       <div
         className={cx(
-          'fixed inset-y-0 left-0 z-40 w-64 transform bg-white transition-transform duration-200 ease-in-out sm:relative sm:w-52 sm:translate-x-0',
+          'fixed inset-y-0 left-0 z-40 w-64 shrink-0 transform bg-white transition-transform duration-200 ease-in-out sm:relative sm:w-52 sm:translate-x-0',
           isNavOpen ? 'translate-x-0' : '-translate-x-full',
         )}>
         <div className="space-y-4 p-4 sm:p-8">
