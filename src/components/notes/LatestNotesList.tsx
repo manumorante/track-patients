@@ -1,8 +1,7 @@
-import { useLatestNotes } from '@/hooks/useNotes'
-import { usePatient } from '@/hooks/usePatients'
-import { Link } from 'react-router-dom'
-import Card from '../common/Card'
+import { useLatestNotes, usePatient } from '@/hooks'
 import type { Note } from '@/types'
+import { Link } from 'react-router-dom'
+import Card from '@/components/common/Card'
 
 export default function LatestNotesList() {
   const { data: notes, isLoading, error } = useLatestNotes()

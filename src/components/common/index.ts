@@ -7,4 +7,3 @@ export { default as Navigation } from './Navigation'
 export { default as NoResultsFound } from './NoResultsFound'
 export { default as Overlayer } from './Overlayer'
 export { default as PageHeader } from './PageHeader'
-

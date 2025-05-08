@@ -1,5 +1,5 @@
+import { PatientEditor } from '@/components/patients'
 import { usePatientsStore } from '@/stores/patientsStore'
-import PatientEditor from './PatientEditor'
 
 export default function PatientEditorDialog() {
   const isFormOpen = usePatientsStore((state) => state.isFormOpen)

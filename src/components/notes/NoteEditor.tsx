@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import type { Note } from '@/types'
-import Card from '../common/Card'
+import Card from '@/components/common/Card'
 import { useForm } from 'react-hook-form'
 
 interface Props {

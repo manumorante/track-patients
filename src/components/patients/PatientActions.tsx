@@ -1,11 +1,12 @@
+import { ActionMenu } from '@/components/common'
 import { useDeletePatient } from '@/hooks'
 import { usePatientsStore } from '@/stores/patientsStore'
 import { uiStore } from '@/stores/uiStore'
+import type { Patient } from '@/types'
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline'
-import { ActionMenu } from '../common'
 
 type PatientActionsProps = {
-  patientId: string
+  patientId: Patient['id']
 }
 
 export default function PatientActions({ patientId }: PatientActionsProps) {

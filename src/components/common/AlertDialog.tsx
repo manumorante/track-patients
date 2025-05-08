@@ -1,6 +1,6 @@
+import { Overlayer } from '@/components/common'
 import { uiStore } from '@/stores/uiStore'
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
-import Overlayer from './Overlayer'
 
 export default function AlertDialog() {
   const alertDialog = uiStore((state) => state.alertDialog)

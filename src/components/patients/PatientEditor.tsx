@@ -1,9 +1,9 @@
+import { useCreatePatient, useUpdatePatient } from '@/hooks'
 import { usePatientsStore } from '@/stores/patientsStore'
-import { useCreatePatient, useUpdatePatient } from '@/hooks/usePatients'
 import type { PatientDraft } from '@/types'
 import { useForm } from 'react-hook-form'
+import Card from '@/components/common/Card'
 import { validation } from './validation'
-import Card from '../common/Card'
 
 const DEFAULT_PATIENT: PatientDraft = {
   name: '',

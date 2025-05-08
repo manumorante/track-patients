@@ -1,11 +1,9 @@
-import { useNotes, useCreateNote } from '@/hooks/useNotes'
-import NoteCard from './NoteCard'
-import { useState } from 'react'
+import { NoResultsFound } from '@/components/common'
+import { NoteCard, NoteEditor } from '@/components/notes'
+import { useCreateNote, useNotes, useUpdateNote } from '@/hooks'
 import type { Note } from '@/types'
-import { useUpdateNote } from '@/hooks/useNotes'
-import NoteEditor from './NoteEditor'
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { NoResultsFound } from '../common'
+import { useState } from 'react'
 
 export default function NotesList({ patientId }: { patientId: string }) {
   const { data: notes, isLoading, error } = useNotes(patientId)
