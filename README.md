@@ -25,7 +25,7 @@ task: build a simple dashboard for tracking patients and coaching notes.
 
 - **Lazy**: each page is loaded on demand, from the router with `React lazy`.
 
-- **Skeleton**: the most relevant components display a skeleton while receiving data.
+- **Skeleton**: the most relevant components display a skeleton while receiving data. I really like this.
 
 - **Responsive**: support for running comfortably on a mobile device:
 
@@ -36,15 +36,17 @@ task: build a simple dashboard for tracking patients and coaching notes.
 
 - **UI Approach**: It's important to know that I've tried to make this _challenge_ as similar to how I would work in a company: controlled, scalable, and uniform. I'm thinking of working with a design team where we would meet to model a _Storybook_, for example.
 
-- **Feature-based components** When thinking about microfrontends or simply a medium-to-large project, it's important to keep in mind that our features should be well organized. In this case, I've made the only available separation `patients` and `notes`, highlighting the potential use of both in other areas of the app.
+- **Feature-based components** When thinking about a medium-to-large project, it's important to keep in mind that our features should be well organized. In this case, I've made the only available separation `patients` and `notes`, highlighting the potential use of both in other areas of the app.
+
+## Notes
+
+- **Auto Barrel Files**: I usually work with an extension that creates and maintains `index.ts` files with all exports. It's very convenient for development and allows for cleaner components.
 
 ## Future Improvements
 
 - 404 page and error boundaries were omitted for simplicity but would be added in a real app.
 
 ## Testing Approach
-
-In this README, please explain your approach to testing this application:
 
 ### What testing strategy would you implement to prevent regressions?
 
