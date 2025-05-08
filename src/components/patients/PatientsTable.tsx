@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Card from '../common/Card'
 import { ActionMenu } from '../common'
 import { PencilIcon } from '@heroicons/react/24/outline'
+import { formatDate } from '@/lib/utils'
 
 export default function PatientsTable() {
   const searchQuery = usePatientsStore((state) => state.searchQuery)
@@ -30,6 +31,8 @@ export default function PatientsTable() {
                 <th className={css.th}>Name</th>
                 <th className={css.th}>Age</th>
                 <th className={css.th}>Primary Condition</th>
+                <th className={css.th}>Created</th>
+                <th className={css.th}>Updated</th>
                 <th className={cx(css.th, 'text-right')}>Actions</th>
               </tr>
             </thead>
@@ -44,6 +47,8 @@ export default function PatientsTable() {
                   </td>
                   <td className={css.td}>{patient.age} years</td>
                   <td className={css.td}>{patient.primaryCondition}</td>
+                  <td className={css.td}>{formatDate(patient.createdAt)}</td>
+                  <td className={css.td}>{formatDate(patient.updatedAt)}</td>
                   <td className={cx(css.td, 'w-30 text-right')}>
                     <ActionMenu
                       actions={[

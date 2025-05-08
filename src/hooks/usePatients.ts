@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { api } from '@/api/patients'
+import { api } from '@/lib/api/patients'
 import type { Patient } from '@/types'
 
 // Queries

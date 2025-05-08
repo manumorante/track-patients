@@ -1,4 +1,4 @@
-import { delay } from '@/api/utils'
+import { delay } from '@/lib/utils'
 import { useNotesStore } from '@/stores/notesStore'
 import type { Note, NoteDraft } from '@/types'
 import { v4 as uuid } from 'uuid'

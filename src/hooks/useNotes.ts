@@ -1,4 +1,4 @@
-import { api } from '@/api/notes'
+import { api } from '@/lib/api/notes'
 import type { Note } from '@/types'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 

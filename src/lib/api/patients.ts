@@ -1,4 +1,4 @@
-import { delay } from '@/api/utils'
+import { delay } from '@/lib/utils'
 import { usePatientsStore } from '@/stores/patientsStore'
 import type { Patient } from '@/types'
 import { v4 as uuid } from 'uuid'

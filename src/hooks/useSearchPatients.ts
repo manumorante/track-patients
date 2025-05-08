@@ -1,4 +1,4 @@
-import { api } from '@/api/patients'
+import { api } from '@/lib/api/patients'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useQuery } from '@tanstack/react-query'
 
