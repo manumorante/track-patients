@@ -9,7 +9,10 @@ const navItems = [
 ]
 
 const getNavLinkClass = (isActive: boolean) =>
-  cx('flex items-center gap-2 text-base', isActive ? 'text-black' : 'text-gray-500')
+  cx(
+    'flex items-center gap-2 text-sm rounded-md px-2 py-1 transition-colors',
+    isActive ? 'text-black bg-zinc-100' : 'text-gray-500 hover:bg-zinc-100',
+  )
 
 export default function Navigation() {
   return (
@@ -20,7 +23,7 @@ export default function Navigation() {
           <span className="font-black">Patients</span>
         </NavLink>
 
-        <nav className="flex flex-col gap-4 border-t pt-6 text-sm">
+        <nav className="flex flex-col gap-2 border-t pt-6 text-sm">
           {navItems.map(({ to, label, icon: Icon }) => (
             <NavLink key={to} to={to} className={({ isActive }) => getNavLinkClass(isActive)}>
               <Icon className="h-4 w-4" />
