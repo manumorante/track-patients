@@ -19,6 +19,10 @@
     focus-visible:ring-2 focus-visible:ring-zinc-200 focus-visible:outline-none focus-visible:border-zinc-300;
   }
 
+  .label {
+    @apply block text-sm font-normal text-zinc-500 my-1 ml-0.5;
+  }
+
   .button,
   .input {
     @apply h-10;

@@ -55,7 +55,7 @@ export default function PatientForm() {
 
       <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="name" className="label">
             Name
           </label>
           <input id="name" type="text" className="input" {...register('name', validation.name)} />
@@ -63,7 +63,7 @@ export default function PatientForm() {
         </div>
 
         <div>
-          <label htmlFor="age" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="age" className="label">
             Age
           </label>
           <input id="age" type="number" className="input" {...register('age', validation.age)} />
@@ -71,7 +71,7 @@ export default function PatientForm() {
         </div>
 
         <div>
-          <label htmlFor="condition" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="condition" className="label">
             Primary Condition
           </label>
           <input
