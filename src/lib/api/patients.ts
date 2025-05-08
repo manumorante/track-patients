@@ -4,6 +4,7 @@ import type { Patient } from '@/types'
 import { v4 as uuid } from 'uuid'
 
 const store = usePatientsStore
+const PAGE_SIZE = 10
 
 export const api = {
   _sortPatients(patients: Patient[]): Patient[] {
@@ -12,21 +13,24 @@ export const api = {
     )
   },
 
-  async search(query: string): Promise<Patient[]> {
+  async search(query: string, page: number = 1): Promise<Patient[]> {
     await delay()
     const patients = store.getState().patients
 
-    if (!query?.trim() || query.length < 2) {
-      return this._sortPatients(patients)
+    let filteredPatients = patients
+    if (query?.trim() && query.length >= 2) {
+      const search = query.toLowerCase().trim()
+      filteredPatients = patients.filter(
+        (p: Patient) =>
+          p.name.toLowerCase().includes(search) ||
+          p.primaryCondition.toLowerCase().includes(search),
+      )
     }
 
-    const search = query.toLowerCase().trim()
-    const filteredPatients = patients.filter(
-      (p: Patient) =>
-        p.name.toLowerCase().includes(search) || p.primaryCondition.toLowerCase().includes(search),
-    )
-
-    return this._sortPatients(filteredPatients)
+    const sortedPatients = this._sortPatients(filteredPatients)
+    const startIndex = (page - 1) * PAGE_SIZE
+    const endIndex = startIndex + PAGE_SIZE
+    return sortedPatients.slice(startIndex, endIndex)
   },
 
   async getOne(id: string): Promise<Patient> {

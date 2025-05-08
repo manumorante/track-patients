@@ -11,12 +11,14 @@ interface PatientsState {
   isFormOpen: boolean
   editingId: string
   searchQuery: string
+  currentPage: number
 
   // Actions
   addForm: () => void
   editForm: (id: string) => void
   closeForm: () => void
   setSearchQuery: (query: string) => void
+  setCurrentPage: (page: number) => void
   setPatients: (patients: Patient[]) => void
 }
 
@@ -30,12 +32,14 @@ export const usePatientsStore = create<PatientsState>()(
       isFormOpen: false,
       editingId: '',
       searchQuery: '',
+      currentPage: 1,
 
       // Actions
       addForm: () => set({ isFormOpen: true, editingId: '' }),
       editForm: (id) => set({ isFormOpen: true, editingId: id }),
       closeForm: () => set({ isFormOpen: false, editingId: '' }),
-      setSearchQuery: (query) => set({ searchQuery: query }),
+      setSearchQuery: (query) => set({ searchQuery: query, currentPage: 1 }),
+      setCurrentPage: (page) => set({ currentPage: page }),
       setPatients: (patients) => set({ patients }),
     }),
     { name: 'patients-storage' },
