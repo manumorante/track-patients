@@ -35,7 +35,7 @@ export default function HomePage() {
             </Link>
 
             {/* Card 2 - Latest Notes */}
-            <Link to="/latest-notes" className="block">
+            <Link to="/patients" className="block">
               <Card className="transition-shadow duration-300 hover:shadow-lg">
                 <div className="px-4 py-5 sm:p-6">
                   <h3 className="text-lg leading-6 font-medium text-gray-900">Latest Notes</h3>

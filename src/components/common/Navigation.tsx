@@ -1,12 +1,11 @@
-import { NavLink } from 'react-router-dom'
-import { UsersIcon, HomeIcon, DocumentTextIcon } from '@heroicons/react/24/outline'
-import cx from 'clsx'
 import { uiStore } from '@/stores/uiStore'
+import { HomeIcon, UsersIcon } from '@heroicons/react/24/outline'
+import cx from 'clsx'
+import { NavLink } from 'react-router-dom'
 
 const navItems = [
   { to: '/', label: 'Home', icon: HomeIcon },
   { to: '/patients', label: 'Patients', icon: UsersIcon },
-  { to: '/latest-notes', label: 'Latest Notes', icon: DocumentTextIcon },
 ]
 
 const getNavLinkClass = (isActive: boolean) =>
