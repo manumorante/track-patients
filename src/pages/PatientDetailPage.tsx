@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 export default function PatientDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  if (!id) return
+  if (!id) return null
 
   return (
     <>
