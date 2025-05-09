@@ -10,35 +10,36 @@
 }
 
 @layer components {
-  /* Form Elements */
+  .input,
+  .button,
+  .textarea {
+    @apply focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2
+    disabled:pointer-events-none disabled:opacity-50;
+  }
+
   .input,
   .textarea {
     @apply w-full px-3 py-1 rounded-md
     border border-zinc-200 hover:border-zinc-300
     bg-white placeholder:text-zinc-400
-    ring-zinc-200
-    focus-visible:ring-2 focus-visible:ring-zinc-200 focus-visible:outline-none focus-visible:border-zinc-300;
+    ring-zinc-200;
   }
+
+  .input {
+    @apply h-10;
+  }  
 
   .label {
     @apply block text-sm font-normal text-zinc-500 my-1 ml-0.5;
   }
 
-  /* Buttons */
-  .button,
-  .input {
-    @apply h-9;
-  }
-
   .button {
-    @apply inline-flex px-3 py-1.5
+    @apply h-9 inline-flex px-3 py-1.5
     text-sm font-medium text-white
     bg-black shadow-xs
     items-center justify-center gap-2
     rounded-md
-    transition-colors outline-none select-none
-    focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2
-    disabled:pointer-events-none disabled:opacity-50 
+    transition-colors outline-none select-none    
     cursor-pointer touch-none;
     -webkit-tap-highlight-color: transparent;
   }
@@ -50,14 +51,10 @@
   }
   
   .button.icon {
-    @apply h-8 px-2 py-0
-     border border-zinc-200 bg-zinc-50
-     text-zinc-800
-    hover:border-zinc-300 hover:bg-white hover:text-zinc-800;
+    @apply h-8 px-2 py-0;
   }
 
   .button.danger {
-    @apply bg-rose-700 text-white
-    hover:bg-rose-800 ;
+    @apply bg-rose-700 hover:bg-rose-800 ;
   }
 }

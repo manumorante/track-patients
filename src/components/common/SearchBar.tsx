@@ -2,14 +2,21 @@ import type { ChangeEvent } from 'react'
 import { MagnifyingGlassIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 
 type Props = {
-  value: string
+  query: string
   onChange: (value: string) => void
   isLoading?: boolean
+  placeholder?: string
 }
 
-export default function PatientsSearch({ value, onChange, isLoading }: Props) {
+export default function SearchBar({
+  query,
+  onChange,
+  isLoading,
+  placeholder = 'Search ...',
+}: Props) {
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)
   return (
-    <div className="flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-3">
+    <div className="input flex items-center gap-2">
       {isLoading ? (
         <ArrowPathIcon className="h-5 w-5 animate-spin text-zinc-400" />
       ) : (
@@ -17,9 +24,9 @@ export default function PatientsSearch({ value, onChange, isLoading }: Props) {
       )}
       <input
         type="search"
-        placeholder="Search patients..."
-        value={value}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
+        placeholder={placeholder}
+        value={query}
+        onChange={handleOnChange}
         className="w-full border-none bg-transparent py-2 outline-none"
       />
     </div>

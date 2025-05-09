@@ -1,27 +1,26 @@
 import { uiStore } from '@/stores/uiStore'
 import { ArrowLeftIcon, Bars3Icon, XMarkIcon, HomeIcon } from '@heroicons/react/24/outline'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 type Props = {
   title: string
-  showBackButton?: boolean
+  backTo?: string
 }
-export default function PageHeader({ title, showBackButton = false }: Props) {
+export default function PageHeader({ title, backTo }: Props) {
   const toggleNav = uiStore((state) => state.toggleNav)
   const isNavOpen = uiStore((state) => state.isNavOpen)
-  const navigate = useNavigate()
 
   return (
     <div className="flex w-full items-center justify-between gap-1 pt-1 pb-4 sm:pb-8">
       <div className="flex items-center gap-3">
-        {showBackButton ? (
-          <button onClick={() => navigate(-1)} className="button icon">
+        {backTo ? (
+          <Link to={backTo} className="button secondary icon">
             <ArrowLeftIcon className="h-4 w-4" />
-          </button>
+          </Link>
         ) : (
-          <button onClick={() => navigate(-1)} className="button icon">
+          <Link to="/" className="button secondary icon">
             <HomeIcon className="h-4 w-4" />
-          </button>
+          </Link>
         )}
 
         <h1 className="text-lg font-light sm:text-xl">{title}</h1>
