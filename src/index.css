@@ -10,19 +10,15 @@
 }
 
 @layer components {
-  .input,
-  .button,
-  .textarea {
-    @apply focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2
-    disabled:pointer-events-none disabled:opacity-50;
-  }
 
   .input,
   .textarea {
     @apply w-full px-3 py-1 rounded-md
     border border-zinc-200 hover:border-zinc-300
     bg-white placeholder:text-zinc-400
-    ring-zinc-200;
+    focus-visible:ring-4 focus-visible:ring-offset-0 focus-visible:ring-zinc-100 focus-visible:outline-0 focus-visible:border-zinc-300
+    disabled:pointer-events-none disabled:opacity-50
+    transition-[box-shadow,border-color];
   }
 
   .input {
@@ -34,13 +30,15 @@
   }
 
   .button {
-    @apply h-9 inline-flex px-3 py-1.5
-    text-sm font-medium text-white
-    bg-black shadow-xs
-    items-center justify-center gap-2
+    @apply h-9 px-3 py-1.5
+    inline-flex items-center justify-center gap-2
+    text-sm font-medium
+    text-white bg-zinc-900 hover:bg-zinc-700
     rounded-md
-    transition-colors outline-none select-none    
-    cursor-pointer touch-none;
+    outline-none select-none cursor-pointer touch-none
+    focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2
+    disabled:pointer-events-none disabled:opacity-50
+    transition-colors;
     -webkit-tap-highlight-color: transparent;
   }
 
