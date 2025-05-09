@@ -1,8 +1,9 @@
 import PageHeader from '@/components/common/PageHeader'
 import { PatientEditorDialog, SearchBar } from '@/components/patients'
 import PatientsTable from '@/components/patients/PatientsTable'
-import { usePatientsStore } from '@/stores/patientsStore'
 import { useSearchPatients } from '@/hooks'
+import { usePatientsStore } from '@/stores/patientsStore'
+import { PlusIcon } from '@heroicons/react/24/outline'
 
 export default function PatientListPage() {
   const addForm = usePatientsStore((state) => state.addForm)
@@ -20,8 +21,9 @@ export default function PatientListPage() {
           <div className="flex-1">
             <SearchBar query={searchQuery} onChange={setSearchQuery} isLoading={isLoading} />
           </div>
-          <button className="button" onClick={addForm} disabled={isFormOpen}>
-            Add Patient
+          <button onClick={addForm} disabled={isFormOpen} className="button">
+            <PlusIcon className="h-5 w-5" />
+            Add New
           </button>
         </div>
 
