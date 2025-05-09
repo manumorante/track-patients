@@ -5,10 +5,11 @@ import { formatDate } from '@/lib/utils'
 import { usePatientsStore } from '@/stores/patientsStore'
 import cx from 'clsx'
 import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function PatientsTable() {
   const searchQuery = usePatientsStore((state) => state.searchQuery)
+  const navigate = useNavigate()
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useSearchPatients(searchQuery)
 
@@ -48,12 +49,11 @@ export default function PatientsTable() {
                 {patients.map((patient) => (
                   <tr
                     key={patient.id}
-                    className="border-b border-zinc-200 bg-white hover:bg-zinc-50">
+                    onClick={() => navigate(`/patients/${patient.id}`)}
+                    className="cursor-pointer border-b border-zinc-200 bg-white hover:bg-zinc-50">
                     <td className={css.td}>
                       <div className="flex flex-col">
-                        <Link to={`/patients/${patient.id}`} className="font-medium">
-                          {patient.name}
-                        </Link>
+                        <span className="font-medium">{patient.name}</span>
                         <div className="mt-1 flex flex-col gap-0.5 text-xs text-gray-500 sm:hidden">
                           <span>{patient.age} years</span>
                           <span>{patient.primaryCondition}</span>

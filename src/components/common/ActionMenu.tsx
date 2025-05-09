@@ -14,7 +14,7 @@ type Props = {
 
 export default function ActionMenu({ actions }: Props) {
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative inline-block text-left" onClick={(e) => e.stopPropagation()}>
       <MenuButton className="inline-flex items-center justify-center rounded-lg p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
         <EllipsisHorizontalIcon className="h-5 w-5" aria-hidden="true" />
       </MenuButton>
