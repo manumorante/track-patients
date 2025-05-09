@@ -1,4 +1,4 @@
-import { NoResultsFound } from '@/components/common'
+import { Card, NoResultsFound } from '@/components/common'
 import { NoteCard, NoteEditor } from '@/components/notes'
 import { useCreateNote, useNotes, useUpdateNote } from '@/hooks'
 import type { Note } from '@/types'
@@ -67,18 +67,20 @@ export default function NotesList({ patientId }: { patientId: string }) {
         />
       )}
 
-      {notes?.map((note) =>
-        editingNote?.id === note.id ? (
-          <NoteEditor
-            key={note.id}
-            note={note}
-            onSave={handleSaveEdit}
-            onCancel={handleCancelEdit}
-          />
-        ) : (
-          <NoteCard key={note.id} note={note} onEdit={handleEdit} />
-        ),
-      )}
+      <Card className="divide-y">
+        {notes?.map((note) =>
+          editingNote?.id === note.id ? (
+            <NoteEditor
+              key={note.id}
+              note={note}
+              onSave={handleSaveEdit}
+              onCancel={handleCancelEdit}
+            />
+          ) : (
+            <NoteCard key={note.id} note={note} onEdit={handleEdit} />
+          ),
+        )}
+      </Card>
 
       {!notes?.length && !isCreating && (
         <NoResultsFound title="No notes available for this patient" />

@@ -1,5 +1,4 @@
 import type { Note } from '@/types'
-import Card from '@/components/common/Card'
 import { useForm } from 'react-hook-form'
 
 interface Props {
@@ -34,7 +33,7 @@ export default function NoteEditor({ note, onSave, onCancel }: Props) {
   }
 
   return (
-    <Card className="p-4">
+    <div className="bg-zinc-50 p-3">
       <form key={note.id} onSubmit={handleSubmit(onSubmit)}>
         <div className="flex items-start justify-between">
           <textarea
@@ -54,6 +53,6 @@ export default function NoteEditor({ note, onSave, onCancel }: Props) {
           </button>
         </div>
       </form>
-    </Card>
+    </div>
   )
 }
