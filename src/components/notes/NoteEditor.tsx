@@ -21,15 +21,15 @@ export default function NoteEditor({ note, onSave, onCancel }: Props) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<NoteFormData>({
     defaultValues: {
       text: note.text,
     },
   })
 
-  const onSubmit = (data: NoteFormData) => {
-    onSave(data.text)
+  const onSubmit = async (data: NoteFormData) => {
+    await onSave(data.text)
   }
 
   return (
@@ -48,7 +48,7 @@ export default function NoteEditor({ note, onSave, onCancel }: Props) {
           <button type="button" onClick={onCancel} className="button secondary">
             Cancel
           </button>
-          <button type="submit" disabled={isSubmitting} className="button">
+          <button type="submit" disabled={isSubmitting || !isDirty} className="button">
             {isSubmitting ? 'Saving...' : 'Save'}
           </button>
         </div>

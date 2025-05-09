@@ -27,16 +27,16 @@ export default function PatientEditor() {
     defaultValues: editingPatient || DEFAULT_PATIENT,
   })
 
-  const onSubmitForm = (data: PatientDraft) => {
+  const onSubmitForm = async (data: PatientDraft) => {
     const formattedData = {
       ...data,
       age: Number(data.age),
     }
 
     if (editingId) {
-      updatePatient.mutate({ id: editingId, patient: formattedData })
+      await updatePatient.mutateAsync({ id: editingId, patient: formattedData })
     } else {
-      createPatient.mutate(formattedData)
+      await createPatient.mutateAsync(formattedData)
     }
     closeForm()
   }
