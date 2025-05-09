@@ -1,22 +1,15 @@
 import PageHeader from '@/components/common/PageHeader'
 import { NotesList } from '@/components/notes'
 import { PatientEditorDialog, PatientProfile } from '@/components/patients'
-import { ArrowLeftIcon } from '@heroicons/react/24/outline'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 export default function PatientDetailPage() {
   const { id } = useParams()
-  const navigate = useNavigate()
   if (!id) return null
 
   return (
     <>
-      <PageHeader title="Patient details" />
-
-      <button onClick={() => navigate(-1)} className="button secondary mb-8">
-        <ArrowLeftIcon className="h-5 w-5" />
-        Back
-      </button>
+      <PageHeader title="Patient details" showBackButton />
 
       <div className="flex flex-col items-start gap-6 md:flex-row">
         <div className="w-full md:w-80">

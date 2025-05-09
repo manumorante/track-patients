@@ -48,6 +48,13 @@
     font-medium text-zinc-700
     hover:border-zinc-300 hover:bg-white hover:text-zinc-800;
   }
+  
+  .button.icon {
+    @apply h-8 px-2 py-0
+     border border-zinc-200 bg-zinc-50
+     text-zinc-800
+    hover:border-zinc-300 hover:bg-white hover:text-zinc-800;
+  }
 
   .button.danger {
     @apply bg-rose-700 text-white
