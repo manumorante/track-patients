@@ -1,4 +1,4 @@
-import { Card, ErrorMessage, Loading, NoResultsFound } from '@/components/common'
+import { Card, ErrorMessage, NoResultsFound } from '@/components/common'
 import { NoteCard, NoteEditor } from '@/components/notes'
 import { useCreateNote, useNotes, useUpdateNote } from '@/hooks'
 import type { Note } from '@/types'
@@ -11,6 +11,8 @@ export default function NotesList({ patientId }: { patientId: string }) {
   const [isCreating, setIsCreating] = useState(false)
   const updateNote = useUpdateNote()
   const createNote = useCreateNote()
+
+  const hasNotes = !!notes?.length
 
   const handleEdit = (note: Note) => {
     setEditingNote(note)
@@ -40,12 +42,11 @@ export default function NotesList({ patientId }: { patientId: string }) {
     setIsCreating(false)
   }
 
-  if (isLoading) return <Loading />
   if (error) return <ErrorMessage message={`Error loading notes: ${error.message}`} />
 
   return (
-    <div className="space-y-4">
-      <div className="flex w-full justify-between">
+    <>
+      <div className="mb-3 flex w-full justify-between">
         <h2 className="text-xl font-medium text-zinc-600">Notes</h2>
 
         <button onClick={() => setIsCreating(true)} className="button" disabled={isCreating}>
@@ -54,34 +55,45 @@ export default function NotesList({ patientId }: { patientId: string }) {
         </button>
       </div>
 
-      {isCreating && (
-        <NoteEditor
-          note={{ id: 'new', text: '', patientId, createdAt: new Date().toISOString() }}
-          onSave={handleSaveNew}
-          onCancel={handleCancelCreate}
-        />
-      )}
+      <div className="relative">
+        {isLoading && (
+          <div className="pointer-events-none absolute inset-0 min-h-32 rounded-lg border bg-zinc-200 p-12 text-center text-gray-600">
+            Loading ...
+          </div>
+        )}
 
-      {!!notes?.length && (
-        <Card className="divide-y">
-          {notes?.map((note) =>
-            editingNote?.id === note.id ? (
+        {!hasNotes && !isLoading && !isCreating && (
+          <NoResultsFound title="No notes available for this patient" />
+        )}
+
+        <Card className="divide-y overflow-hidden">
+          {isCreating && !isLoading && (
+            <div className="bg-zinc-50 p-3">
               <NoteEditor
-                key={note.id}
-                note={note}
-                onSave={handleSaveEdit}
-                onCancel={handleCancelEdit}
+                note={{ id: 'new', text: '', patientId, createdAt: new Date().toISOString() }}
+                onSave={handleSaveNew}
+                onCancel={handleCancelCreate}
               />
-            ) : (
-              <NoteCard key={note.id} note={note} onEdit={handleEdit} />
-            ),
+            </div>
           )}
-        </Card>
-      )}
 
-      {!notes?.length && !isCreating && (
-        <NoResultsFound title="No notes available for this patient" />
-      )}
-    </div>
+          {hasNotes &&
+            notes?.map((note) =>
+              editingNote?.id === note.id ? (
+                <div className="bg-zinc-50 p-3">
+                  <NoteEditor
+                    key={note.id}
+                    note={note}
+                    onSave={handleSaveEdit}
+                    onCancel={handleCancelEdit}
+                  />
+                </div>
+              ) : (
+                <NoteCard key={note.id} note={note} onEdit={handleEdit} />
+              ),
+            )}
+        </Card>
+      </div>
+    </>
   )
 }

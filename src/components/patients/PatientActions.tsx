@@ -3,8 +3,7 @@ import { useDeletePatient } from '@/hooks'
 import { usePatientsStore } from '@/stores/patientsStore'
 import { uiStore } from '@/stores/uiStore'
 import type { Patient } from '@/types'
-import { EyeIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/outline'
-import { useNavigate } from 'react-router-dom'
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline'
 
 type PatientActionsProps = {
   patientId: Patient['id']
@@ -14,7 +13,6 @@ export default function PatientActions({ patientId }: PatientActionsProps) {
   const editForm = usePatientsStore((state) => state.editForm)
   const deletePatient = useDeletePatient()
   const openAlertDialog = uiStore((state) => state.openAlertDialog)
-  const navigate = useNavigate()
 
   const handleDeletePatient = () => {
     openAlertDialog({
@@ -27,11 +25,6 @@ export default function PatientActions({ patientId }: PatientActionsProps) {
   return (
     <ActionMenu
       actions={[
-        {
-          label: 'Patient profile',
-          icon: EyeIcon,
-          onClick: () => navigate(`/patients/${patientId}`),
-        },
         {
           label: 'Edit details',
           icon: PencilIcon,
