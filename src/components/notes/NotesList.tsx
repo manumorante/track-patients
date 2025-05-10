@@ -67,20 +67,22 @@ export default function NotesList({ patientId }: { patientId: string }) {
         />
       )}
 
-      <Card className="divide-y">
-        {notes?.map((note) =>
-          editingNote?.id === note.id ? (
-            <NoteEditor
-              key={note.id}
-              note={note}
-              onSave={handleSaveEdit}
-              onCancel={handleCancelEdit}
-            />
-          ) : (
-            <NoteCard key={note.id} note={note} onEdit={handleEdit} />
-          ),
-        )}
-      </Card>
+      {!!notes?.length && (
+        <Card className="divide-y">
+          {notes?.map((note) =>
+            editingNote?.id === note.id ? (
+              <NoteEditor
+                key={note.id}
+                note={note}
+                onSave={handleSaveEdit}
+                onCancel={handleCancelEdit}
+              />
+            ) : (
+              <NoteCard key={note.id} note={note} onEdit={handleEdit} />
+            ),
+          )}
+        </Card>
+      )}
 
       {!notes?.length && !isCreating && (
         <NoResultsFound title="No notes available for this patient" />

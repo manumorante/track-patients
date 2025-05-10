@@ -1,7 +1,7 @@
 import { NoteActions } from '@/components/notes'
 import type { Note } from '@/types'
 
-interface Props {
+type Props = {
   note: Note
   onEdit?: (note: Note) => void
 }

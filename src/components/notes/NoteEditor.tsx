@@ -1,43 +1,26 @@
-import type { Note } from '@/types'
+import type { Note, NoteFormData } from '@/types'
 import { useForm } from 'react-hook-form'
 
-interface Props {
+type Props = {
   note: Note
   onSave: (text: string) => void
   onCancel: () => void
 }
 
-interface NoteFormData {
-  text: string
-}
-
-const validation = {
-  text: {
-    required: 'The note cannot be empty',
-  },
-}
-
 export default function NoteEditor({ note, onSave, onCancel }: Props) {
+  const { id, text } = note
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isDirty },
-  } = useForm<NoteFormData>({
-    defaultValues: {
-      text: note.text,
-    },
-  })
-
-  const onSubmit = async (data: NoteFormData) => {
-    await onSave(data.text)
-  }
+  } = useForm<NoteFormData>({ defaultValues: { text } })
 
   return (
     <div className="bg-zinc-50 p-3">
-      <form key={note.id} onSubmit={handleSubmit(onSubmit)}>
+      <form key={id} onSubmit={handleSubmit((data) => onSave(data.text))}>
         <div className="flex items-start justify-between">
           <textarea
-            {...register('text', validation.text)}
+            {...register('text', { required: 'The note cannot be empty' })}
             className={`textarea w-full resize-none ${errors.text ? 'border-red-500' : ''}`}
             rows={3}
             autoFocus

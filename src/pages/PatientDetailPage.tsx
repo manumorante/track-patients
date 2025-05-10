@@ -9,7 +9,7 @@ export default function PatientDetailPage() {
 
   return (
     <>
-      <PageHeader title="Patient details" backTo="/patients" />
+      <PageHeader title="Details" backTo="/patients" />
 
       <div className="flex flex-col items-start gap-6 md:flex-row">
         <div className="w-full md:w-80">

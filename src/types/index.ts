@@ -15,5 +15,7 @@ export type Note = {
   updatedAt?: string
 }
 
+export type NoteFormData = Pick<Note, 'text'>
+
 export type PatientDraft = Omit<Patient, 'id'>
 export type NoteDraft = Omit<Note, 'id'>
