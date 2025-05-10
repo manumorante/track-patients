@@ -46,7 +46,7 @@ export default function NotesList({ patientId }: { patientId: string }) {
 
   return (
     <>
-      <div className="mb-3 flex w-full justify-between">
+      <div className="mb-3 flex w-full items-center justify-between rounded-lg border bg-zinc-100 p-2 pl-4">
         <h2 className="text-xl font-medium text-zinc-600">Notes</h2>
 
         <button onClick={() => setIsCreating(true)} className="button" disabled={isCreating}>
@@ -55,9 +55,9 @@ export default function NotesList({ patientId }: { patientId: string }) {
         </button>
       </div>
 
-      <div className="relative">
+      <Card className="relative min-h-50 divide-y overflow-hidden">
         {isLoading && (
-          <div className="pointer-events-none absolute inset-0 min-h-32 rounded-lg border bg-zinc-200 p-12 text-center text-gray-600">
+          <div className="pointer-events-none absolute inset-0 flex min-h-32 items-center justify-center rounded-lg border bg-zinc-100 p-12 text-center text-gray-600">
             Loading ...
           </div>
         )}
@@ -66,34 +66,32 @@ export default function NotesList({ patientId }: { patientId: string }) {
           <NoResultsFound title="No notes available for this patient" />
         )}
 
-        <Card className="divide-y overflow-hidden">
-          {isCreating && !isLoading && (
-            <div className="bg-zinc-50 p-3">
-              <NoteEditor
-                note={{ id: 'new', text: '', patientId, createdAt: new Date().toISOString() }}
-                onSave={handleSaveNew}
-                onCancel={handleCancelCreate}
-              />
-            </div>
-          )}
+        {isCreating && !isLoading && (
+          <div className="bg-zinc-50 p-3">
+            <NoteEditor
+              note={{ id: 'new', text: '', patientId, createdAt: new Date().toISOString() }}
+              onSave={handleSaveNew}
+              onCancel={handleCancelCreate}
+            />
+          </div>
+        )}
 
-          {hasNotes &&
-            notes?.map((note) =>
-              editingNote?.id === note.id ? (
-                <div className="bg-zinc-50 p-3">
-                  <NoteEditor
-                    key={note.id}
-                    note={note}
-                    onSave={handleSaveEdit}
-                    onCancel={handleCancelEdit}
-                  />
-                </div>
-              ) : (
-                <NoteCard key={note.id} note={note} onEdit={handleEdit} />
-              ),
-            )}
-        </Card>
-      </div>
+        {hasNotes &&
+          notes?.map((note) =>
+            editingNote?.id === note.id ? (
+              <div className="bg-zinc-50 p-3">
+                <NoteEditor
+                  key={note.id}
+                  note={note}
+                  onSave={handleSaveEdit}
+                  onCancel={handleCancelEdit}
+                />
+              </div>
+            ) : (
+              <NoteCard key={note.id} note={note} onEdit={handleEdit} />
+            ),
+          )}
+      </Card>
     </>
   )
 }
