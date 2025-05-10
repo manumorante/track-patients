@@ -1,13 +1,10 @@
+import { notes as initialNotes } from '@/data/notes'
+import type { Note } from '@/types'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { Note } from '@/types'
-import { notes as initialNotes } from '@/data/notes'
 
 interface NotesState {
   notes: Note[]
-
-  isFormOpen: boolean
-  editingId: string | null
 
   // Actions
   setNotes: (notes: Note[]) => void
@@ -16,10 +13,9 @@ interface NotesState {
 export const useNotesStore = create<NotesState>()(
   persist(
     (set) => ({
-      // Data
       notes: initialNotes,
-      isFormOpen: false,
-      editingId: '',
+
+      // Actions
       setNotes: (notes) => set({ notes }),
     }),
     { name: 'app-storage' },
