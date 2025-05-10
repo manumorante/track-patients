@@ -1,4 +1,4 @@
-import { Card, NoResultsFound } from '@/components/common'
+import { Card, ErrorMessage, Loading, NoResultsFound } from '@/components/common'
 import { NoteCard, NoteEditor } from '@/components/notes'
 import { useCreateNote, useNotes, useUpdateNote } from '@/hooks'
 import type { Note } from '@/types'
@@ -40,13 +40,8 @@ export default function NotesList({ patientId }: { patientId: string }) {
     setIsCreating(false)
   }
 
-  if (isLoading) {
-    return <p className="text-gray-600">Loading notes...</p>
-  }
-
-  if (error) {
-    return <p className="text-red-600">Error loading notes: {error.message}</p>
-  }
+  if (isLoading) return <Loading />
+  if (error) return <ErrorMessage message={`Error loading notes: ${error.message}`} />
 
   return (
     <div className="space-y-4">
