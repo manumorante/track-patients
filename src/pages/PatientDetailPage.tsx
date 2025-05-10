@@ -11,8 +11,8 @@ export default function PatientDetailPage() {
     <>
       <PageHeader title="Details" backTo="/patients" />
 
-      <div className="flex flex-col items-start gap-6 md:flex-row">
-        <div className="w-full md:w-80">
+      <div className="flex flex-col items-start gap-6 lg:flex-row">
+        <div className="w-full flex-1">
           <PatientProfile id={id} />
         </div>
         <div className="w-full flex-1">

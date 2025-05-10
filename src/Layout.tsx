@@ -5,7 +5,7 @@ export default function Layout() {
   return (
     <div className="flex min-h-screen">
       <Navigation />
-      <div className="container mx-auto max-w-5xl p-4 sm:p-6">
+      <div className="container mx-auto p-4 sm:p-8">
         <Outlet />
       </div>
       <AlertDialog />
